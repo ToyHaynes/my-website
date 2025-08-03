@@ -6,8 +6,15 @@
     <title>Drum Exercise Generator</title>
     <style>
         :root {
-            /* DEĞİŞİKLİK 1: Ana tema rengi turuncu olarak ayarlandı */
-            --primary-color: #ff8c00; /* Koyu Turuncu */
+            /* YENİ RENK PALETİ */
+            --bg-color: #423e37;
+            --text-color: #edebd7;
+            --primary-color: #e3b23c;
+            --neutral-light: #a39594;
+            --neutral-dark: #6e675f;
+            --white: #ffffff;
+
+            /* Boyut değişkenleri */
             --char-width: 22px; 
             --gap-width: 22px;
             --measure-gap: 44px;
@@ -15,48 +22,62 @@
         * { box-sizing: border-box; }
         body {
             font-family: 'Courier New', Courier, monospace;
-            background-color: #1e1e1e;
-            color: #d4d4d4;
+            background-color: var(--bg-color);
+            color: var(--text-color);
             padding: 20px;
             display: flex;
             justify-content: center;
         }
-        h2, h3 {
-            /* Başlıklar artık ana tema rengini kullanıyor */
+
+        /* --- BAŞLIK STİLİ GÜNCELLEMESİ --- */
+        /* h3 altındaki çizgiler kaldırıldı, renkler yeni palete uyarlandı */
+        h2 {
+            color: var(--text-color);
+            font-family: sans-serif;
+            text-align: center;
+        }
+        h3 {
             color: var(--primary-color);
             font-family: sans-serif;
+            border-bottom: 1px solid var(--neutral-dark); /* Çizgi yerine daha soluk bir alt kenarlık */
+            padding-bottom: 8px;
         }
+        
         .container {
             width: fit-content;
             margin: 0 auto;
         }
         
         .controls {
-            /* Konumlandırma artık h3'ün altında olacak */
             margin-top: 15px;
             margin-bottom: 20px;
         }
         .control-btn {
-            background-color: #3c3c3c;
-            border: 1px solid #555;
-            color: #d4d4d4;
+            background-color: var(--neutral-dark);
+            border: 1px solid var(--neutral-light);
+            color: var(--text-color);
             padding: 8px 16px;
             margin-right: 10px;
             cursor: pointer;
             border-radius: 4px;
+            transition: all 0.2s ease-in-out;
+        }
+        .control-btn:hover {
+            border-color: var(--primary-color);
+            color: var(--primary-color);
         }
         .control-btn.active {
-            background-color: #094771;
-            /* Aktif buton kenarlığı da ana tema rengini kullanıyor */
+            background-color: var(--primary-color);
             border-color: var(--primary-color);
+            color: var(--bg-color); /* Koyu arka plan rengi */
         }
 
         #input-staff {
             display: grid;
             grid-template-columns: repeat(4, auto);
             gap: var(--measure-gap);
-            border: 2px solid #555;
-            background-color: #2d2d2d;
+            border: 2px solid var(--neutral-dark);
+            background-color: rgba(0, 0, 0, 0.2);
             border-radius: 5px;
             margin-bottom: 30px;
             padding: 20px;
@@ -68,7 +89,7 @@
         }
         .measure:not(:last-child)::after {
             content: ''; position: absolute; height: 70%; width: 2px;
-            background-color: #ffc107;
+            background-color: var(--primary-color);
             top: 15%;
             right: calc( (var(--measure-gap) / -2) - 1px );
         }
@@ -80,18 +101,18 @@
             margin-right: var(--gap-width);
         }
         .note-head {
-            width: 14px; height: 11px; background-color: #d4d4d4; border-radius: 50%;
+            width: 14px; height: 11px; background-color: var(--text-color); border-radius: 50%;
             transform: rotate(-15deg); position: absolute; top: 50px;
             left: calc(50% - 7px);
         }
         .note-stem {
-            position: absolute; width: 2px; height: 35px; background-color: #d4d4d4;
+            position: absolute; width: 2px; height: 35px; background-color: var(--text-color);
             left: calc(50% + 5px);
             top: 18px;
-            transition: background-color 0.2s; /* Renk değişimi için yumuşak geçiş */
+            transition: background-color 0.2s;
         }
         .beam {
-            position: absolute; height: 4px; background-color: #d4d4d4; top: 18px;
+            position: absolute; height: 4px; background-color: var(--text-color); top: 18px;
         }
         .beam.first-group {
             width: calc(3 * var(--char-width));
@@ -103,31 +124,27 @@
         }
         .accent-mark {
             position: absolute; top: 0px ;left: 5px; font-size: 24px; font-weight: bold;
-            color: #1f811f; opacity: 0; transition: opacity 0.2s;
+            color: var(--primary-color);
+            opacity: 0; transition: opacity 0.2s;
             width: 100%; text-align: center;
         }
         .note-container.accented .accent-mark { opacity: 1; }
-        .note-container.accented .note-head { background-color: #1f811f; transform: rotate(-15deg) scale(1.1); }
-        
-        /* DEĞİŞİKLİK 3: Aksanlı notanın dikey çubuğu yeşil oluyor */
+        .note-container.accented .note-head { background-color: var(--primary-color); transform: rotate(-15deg) scale(1.1); }
         .note-container.accented .note-stem {
-            background-color: #1f811f;
+            background-color: var(--primary-color);
         }
 
         #output {
-            background-color: #252526; padding: 20px 0; border-radius: 5px;
+            background-color: rgba(0, 0, 0, 0.2); 
+            padding: 20px;
+            border-radius: 5px;
             width: 100%;
-        }
-        .output-title {
-            color: var(--primary-color);
-            font-size: 22px; padding-left: 20px;
         }
         .sticking-group-container {
             margin-bottom: 15px;
         }
         .sticking-group-container .line {
             white-space: nowrap; line-height: 2.2em; font-size: 16px;
-            padding-left: 20px;
         }
         .variation-spacer {
             height: 2em;
@@ -139,12 +156,12 @@
         .sub-spacer { width: var(--gap-width); }
         .bar-line {
             width: var(--measure-gap);
-            color: #ffc107;
+            color: var(--primary-color);
             font-weight: bold;
         }
        .note.accent {
             background-color: transparent;
-            color: #1f811f;
+            color: var(--primary-color);
             font-weight: bold;
             text-transform: uppercase;
         }
@@ -152,7 +169,7 @@
 </head>
 <body>
     <div class="container">
-        <h2>🥁 Accents & Rebounds Ultimate</h2>
+        <h2>🥁 ACCENTS & REBOUNDS ULTIMATE 🥁</h2>
         
         <h3>1. Create Melody (Choose Accents):</h3>
         
@@ -181,7 +198,7 @@
         let finalHtmlOutput = ""; 
         for (const group of stickingGroups) {
             finalHtmlOutput += `<div class="sticking-group-container">`;
-            finalHtmlOutput += `<h3 class="output-title">${group.title}</h3>`;
+            finalHtmlOutput += `<h3>${group.title}</h3>`;
             const patternKeys = Object.keys(group.patterns);
             patternKeys.forEach((key, index) => {
                 const stickingPattern = group.patterns[key];
