@@ -1,12 +1,13 @@
 <!DOCTYPE html>
-<html lang="tr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Davul Egzersiz Oluşturucu</title>
+    <title>Drum Exercise Generator</title>
     <style>
-        /* CSS - DAHA GERÇEKÇİ NOTA GÖRÜNÜMÜ GÜNCELLEMESİ */
         :root {
+            /* DEĞİŞİKLİK 1: Ana tema rengi turuncu olarak ayarlandı */
+            --primary-color: #ff8c00; /* Koyu Turuncu */
             --char-width: 22px; 
             --gap-width: 22px;
             --measure-gap: 44px;
@@ -20,8 +21,9 @@
             display: flex;
             justify-content: center;
         }
-        h3 {
-            color: #4ec9b0;
+        h2, h3 {
+            /* Başlıklar artık ana tema rengini kullanıyor */
+            color: var(--primary-color);
             font-family: sans-serif;
         }
         .container {
@@ -30,6 +32,8 @@
         }
         
         .controls {
+            /* Konumlandırma artık h3'ün altında olacak */
+            margin-top: 15px;
             margin-bottom: 20px;
         }
         .control-btn {
@@ -43,7 +47,8 @@
         }
         .control-btn.active {
             background-color: #094771;
-            border-color: #4ec9b0;
+            /* Aktif buton kenarlığı da ana tema rengini kullanıyor */
+            border-color: var(--primary-color);
         }
 
         #input-staff {
@@ -63,7 +68,8 @@
         }
         .measure:not(:last-child)::after {
             content: ''; position: absolute; height: 70%; width: 2px;
-            background-color: #666; top: 15%;
+            background-color: #ffc107;
+            top: 15%;
             right: calc( (var(--measure-gap) / -2) - 1px );
         }
         
@@ -78,18 +84,15 @@
             transform: rotate(-15deg); position: absolute; top: 50px;
             left: calc(50% - 7px);
         }
-
-        /* DÜZELTME 1: Nota sapını nota topunun sağına alıyoruz */
         .note-stem {
             position: absolute; width: 2px; height: 35px; background-color: #d4d4d4;
-            left: calc(50% + 5px); /* Merkezden sağa kaydırıldı */
+            left: calc(50% + 5px);
             top: 18px;
+            transition: background-color 0.2s; /* Renk değişimi için yumuşak geçiş */
         }
         .beam {
             position: absolute; height: 4px; background-color: #d4d4d4; top: 18px;
         }
-
-        /* DÜZELTME 2: Beam'lerin pozisyon ve genişlikleri saplara göre yeniden hesaplandı */
         .beam.first-group {
             width: calc(3 * var(--char-width));
             left: calc(var(--char-width) / 2 + 5px);
@@ -98,21 +101,26 @@
             width: calc(3 * var(--char-width));
             left: calc(4 * var(--char-width) + var(--gap-width) + var(--char-width) / 2 + 5px);
         }
-
         .accent-mark {
             position: absolute; top: 0px ;left: 5px; font-size: 24px; font-weight: bold;
-            color: #4ec9b0; opacity: 0; transition: opacity 0.2s;
+            color: #1f811f; opacity: 0; transition: opacity 0.2s;
             width: 100%; text-align: center;
         }
         .note-container.accented .accent-mark { opacity: 1; }
-        .note-container.accented .note-head { background-color: #4ec9b0; transform: rotate(-15deg) scale(1.1); }
+        .note-container.accented .note-head { background-color: #1f811f; transform: rotate(-15deg) scale(1.1); }
+        
+        /* DEĞİŞİKLİK 3: Aksanlı notanın dikey çubuğu yeşil oluyor */
+        .note-container.accented .note-stem {
+            background-color: #1f811f;
+        }
 
         #output {
             background-color: #252526; padding: 20px 0; border-radius: 5px;
             width: 100%;
         }
         .output-title {
-            color: #4ec9b0; font-size: 22px; padding-left: 20px;
+            color: var(--primary-color);
+            font-size: 22px; padding-left: 20px;
         }
         .sticking-group-container {
             margin-bottom: 15px;
@@ -131,29 +139,35 @@
         .sub-spacer { width: var(--gap-width); }
         .bar-line {
             width: var(--measure-gap);
-            color: #dcdcaa;
+            color: #ffc107;
             font-weight: bold;
         }
-        .note.accent {
-            background-color: #1f811f; color: white; font-weight: bold; text-transform: uppercase;
+       .note.accent {
+            background-color: transparent;
+            color: #1f811f;
+            font-weight: bold;
+            text-transform: uppercase;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h2>🥁 Accents & Rebounds Egzersizi</h2>
+        <h2>🥁 Accents & Rebounds Ultimate</h2>
+        
+        <h3>1. Create Melody (Choose Accents):</h3>
+        
         <div class="controls">
-            <button id="btn-4" class="control-btn active">4 Ölçü</button>
-            <button id="btn-8" class="control-btn">8 Ölçü</button>
-            <button id="btn-12" class="control-btn">12 Ölçü</button>
+            <button id="btn-4" class="control-btn active">4 Bar</button>
+            <button id="btn-8" class="control-btn">8 Bar</button>
+            <button id="btn-12" class="control-btn">12 Bar</button>
         </div>
-        <h3>1. Melodini Oluştur (Aksanları Seç):</h3>
+
         <div id="input-staff"></div>
-        <h3>2. Sonuç: El Sıralamaları</h3>
+        <h3>2. Stickings</h3>
         <div id="output"></div>
     </div>
     <script>
-    // JAVASCRIPT KODUNDA HİÇBİR DEĞİŞİKLİK YOK
+    // JavaScript kodunda hiçbir değişiklik yok
     const stickingGroups = [ { title: "Single", patterns: { "R": "rlrl", "L": "lrlr" } }, { title: "Double", patterns: { "R": "rrll", "L": "llrr" } }, { title: "Inverted Double", patterns: { "R": "rllr", "L": "lrrl" } }, { title: "Paradiddle", patterns: { "R": "rlrrlrll", "L": "lrllrllr" } }, { title: "Paradiddle Inversion no:1", patterns: { "R": "rllrlrrl", "L": "lrrlrllr" } }, { title: "Paradiddle Inversion no:2", patterns: { "R": "rrlrllrl", "L": "llrllr" } }, { title: "Four Stroke Rolls", patterns: { "R": "rrrlllll", "L": "llllrrrr" } }, { title: "Single Hand Patterns", patterns: { "R": "rrrr", "L": "llll" } } ];
     const notesPerMeasure = 8;
     const notesPerRow = notesPerMeasure * 4;
