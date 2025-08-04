@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>A&R+ | Drum Exercise Generator</title>
+    <title>Batuhan Toyhan | A&R+ Drum Exercise Generator</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <style>
         :root {
             --bg-color: #423e37;
@@ -17,225 +18,181 @@
             --measure-gap: 44px;
         }
         * { box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
         body {
             font-family: 'Courier New', Courier, monospace;
             background-color: var(--bg-color);
             color: var(--text-color);
-            padding: 20px;
+            padding: 0; margin: 0;
+        }
+        .main-header {
+            background-color: rgba(0,0,0,0.3);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(5px);
             display: flex;
-            justify-content: center;
-        }
-        h2 {
-            color: var(--text-color);
-            font-family: sans-serif;
-            text-align: center;
-        }
-        h3 {
-            color: var(--primary-color);
-            font-family: sans-serif;
-            border-bottom: 1px solid var(--neutral-dark);
-            padding-bottom: 8px;
-        }
-        .container {
-            width: fit-content;
-            margin: 0 auto;
-        }
-        .controls {
-            margin-top: 15px;
-            margin-bottom: 20px;
-            display: flex;
+            justify-content: space-between;
             align-items: center;
+            transition: transform 0.3s ease-in-out;
         }
-        .control-btn {
-            background-color: var(--neutral-dark);
-            border: 1px solid var(--neutral-light);
-            color: var(--text-color);
-            padding: 8px 16px;
-            margin-right: 10px;
-            cursor: pointer;
-            border-radius: 4px;
-            transition: all 0.2s ease-in-out;
+        .main-header.hidden {
+            transform: translateY(-100%);
         }
-        .control-btn:hover {
-            border-color: var(--primary-color);
-            color: var(--primary-color);
-        }
-        .control-btn.active {
-            background-color: var(--primary-color);
-            border-color: var(--primary-color);
-            color: var(--bg-color);
-        }
-        .control-select {
-            background-color: var(--neutral-dark);
-            border: 1px solid var(--neutral-light);
-            color: var(--text-color);
-            padding: 7px;
-            border-radius: 4px;
-            margin-left: auto;
-        }
-        .download-section {
-            margin-top: 30px;
-            padding-top: 20px;
-            border-top: 1px solid var(--neutral-dark);
+
+        /* DEĞİŞİKLİK 4: Header hizalaması */
+        .header-brand {
             display: flex;
-            align-items: center;
-            gap: 15px;
+            flex-direction: column;
+            align-items: center; /* İki satırı birbirine göre ortalar */
         }
-        .filename-input {
-            background-color: rgba(0, 0, 0, 0.2);
-            border: 1px solid var(--neutral-light);
-            color: var(--text-color);
-            padding: 8px;
-            border-radius: 4px;
+        .header-brand .brand-name {
+            margin: 0;
             font-family: sans-serif;
-            flex-grow: 1;
+            font-size: 1.5rem;
+            color: var(--text-color);
         }
-        #input-staff {
-            display: grid;
-            grid-template-columns: repeat(4, auto);
-            gap: var(--measure-gap);
-            border: 2px solid var(--neutral-dark);
-            background-color: rgba(0, 0, 0, 0.2);
-            border-radius: 5px;
-            margin-bottom: 30px;
-            padding: 20px;
+        .header-brand .brand-titles {
+            margin: 0;
+            font-family: sans-serif;
+            font-size: 0.8rem;
+            color: var(--neutral-light);
+            letter-spacing: 1px;
         }
-        .measure {
-            display: flex;
-            position: relative;
-            width: calc(8 * var(--char-width) + var(--gap-width));
-        }
-        .measure:not(:last-child)::after {
-            content: ''; position: absolute; height: 70%; width: 2px;
-            background-color: var(--primary-color);
-            top: 15%;
-            right: calc( (var(--measure-gap) / -2) - 1px );
-        }
-        .note-container {
-            position: relative; width: var(--char-width); height: 80px; cursor: pointer;
-        }
-        .measure .note-container:nth-child(4) {
-            margin-right: var(--gap-width);
-        }
-        .note-head {
-            width: 14px; height: 11px; background-color: var(--text-color); border-radius: 50%;
-            transform: rotate(-15deg); position: absolute; top: 50px;
-            left: calc(50% - 7px);
-        }
-        .note-stem {
-            position: absolute; width: 2px; height: 35px; background-color: var(--text-color);
-            left: calc(50% + 5px);
-            top: 18px;
-            transition: background-color 0.2s;
-        }
-        .beam {
-            position: absolute; height: 4px; background-color: var(--text-color); top: 18px;
-        }
-        .beam.first-group {
-            width: calc(3 * var(--char-width));
-            left: calc(var(--char-width) / 2 + 5px);
-        }
-        .beam.second-group {
-            width: calc(3 * var(--char-width));
-            left: calc(4 * var(--char-width) + var(--gap-width) + var(--char-width) / 2 + 5px);
-        }
-        .accent-mark {
-            position: absolute; top: 0px ;left: 5px; font-size: 24px; font-weight: bold;
-            color: var(--primary-color);
-            opacity: 0; transition: opacity 0.2s;
-            width: 100%; text-align: center;
-        }
+        .main-nav ul { display: flex; gap: 2rem; margin: 0; padding: 0; list-style: none; }
+        .main-nav a { color: var(--text-color); text-decoration: none; font-family: sans-serif; font-weight: bold; transition: color 0.2s; }
+        .main-nav a:hover { color: var(--primary-color); }
+        
+        section { padding: 4rem 2rem; }
+        .section-content { max-width: 950px; margin: 0 auto; }
+        h2 { color: var(--text-color); font-family: sans-serif; text-align: center; font-size: 2.5rem; margin-top:0; margin-bottom: 2rem; }
+        h3 { color: var(--primary-color); font-family: sans-serif; border-bottom: 1px solid var(--neutral-dark); padding-bottom: 8px; }
+        .container { width: fit-content; margin: 0 auto; max-width: 100%; }
+        .controls { margin-top: 15px; margin-bottom: 20px; display: flex; align-items: center; flex-wrap: wrap; gap: 10px; }
+        .control-btn { background-color: var(--neutral-dark); border: 1px solid var(--neutral-light); color: var(--text-color); padding: 8px 16px; margin-right: 10px; cursor: pointer; border-radius: 4px; transition: all 0.2s ease-in-out; }
+        .control-btn:hover { border-color: var(--primary-color); color: var(--primary-color); }
+        .control-btn.active { background-color: var(--primary-color); border-color: var(--primary-color); color: var(--bg-color); }
+        .control-select { background-color: var(--neutral-dark); border: 1px solid var(--neutral-light); color: var(--text-color); padding: 7px; border-radius: 4px; margin-left: auto; }
+        #input-staff { display: grid; grid-template-columns: repeat(4, auto); gap: var(--measure-gap); border: 2px solid var(--neutral-dark); background-color: rgba(0, 0, 0, 0.2); border-radius: 5px; margin-bottom: 30px; padding: 20px; }
+        .measure { display: flex; position: relative; width: calc(8 * var(--char-width) + var(--gap-width)); }
+        .measure:not(:last-child)::after { content: ''; position: absolute; height: 70%; width: 2px; background-color: var(--primary-color); top: 15%; right: calc( (var(--measure-gap) / -2) - 1px ); }
+        #input-staff .measure:nth-of-type(4n)::after { display: none; }
+        .note-container { position: relative; width: var(--char-width); height: 80px; cursor: pointer; }
+        .measure .note-container:nth-child(4) { margin-right: var(--gap-width); }
+        .note-head { width: 14px; height: 11px; background-color: var(--text-color); border-radius: 50%; transform: rotate(-15deg); position: absolute; top: 50px; left: calc(50% - 7px); }
+        .note-stem { position: absolute; width: 2px; height: 35px; background-color: var(--text-color); left: calc(50% + 5px); top: 18px; transition: background-color 0.2s; }
+        .beam { position: absolute; height: 4px; background-color: var(--text-color); top: 18px; }
+        .beam.first-group { width: calc(3 * var(--char-width)); left: calc(var(--char-width) / 2 + 5px); }
+        .beam.second-group { width: calc(3 * var(--char-width)); left: calc(4 * var(--char-width) + var(--gap-width) + var(--char-width) / 2 + 5px); }
+        .accent-mark { position: absolute; top: -2px; font-size: 24px; font-weight: bold; color: var(--primary-color); opacity: 0; transition: opacity 0.2s; width: 100%; text-align: center; }
         .note-container.accented .accent-mark { opacity: 1; }
         .note-container.accented .note-head { background-color: var(--primary-color); transform: rotate(-15deg) scale(1.1); }
-        .note-container.accented .note-stem {
-            background-color: var(--primary-color);
-        }
-        #output {
-            background-color: rgba(0, 0, 0, 0.2); 
-            padding: 20px;
-            border-radius: 5px;
-            width: 100%;
-        }
+        .note-container.accented .note-stem { background-color: var(--primary-color); }
+        #output { background-color: rgba(0, 0, 0, 0.2); padding: 20px; border-radius: 5px; width: 100%; }
         .sticking-group-container { margin-bottom: 15px; }
-        .sticking-group-container .line { white-space: nowrap; line-height: 2.2em; font-size: 16px; }
-        .variation-spacer { height: 2em; }
+        .sticking-group-container .line { display: flex; flex-wrap: nowrap; line-height: 2.2em; font-size: 16px; }
+        .variation-spacer { height: 1.5em; }
         .note, .sub-spacer, .bar-line { display: inline-block; text-align: center; vertical-align: middle; }
         .note { width: var(--char-width); }
         .sub-spacer { width: var(--gap-width); }
         .bar-line { width: var(--measure-gap); color: var(--primary-color); font-weight: bold; }
         .note.accent { background-color: transparent; color: var(--primary-color); font-weight: bold; text-transform: uppercase; }
-
-        /* YENİ: Ekranda görünmeyecek olan PDF başlığı */
-        #print-header {
-            display: none;
+        .swiper { width: 100%; height: 100%; padding: 10px 0 40px 0; }
+        .swiper-slide { text-align: center; font-size: 18px; background: transparent; display: flex; justify-content: center; align-items: center; width: 70%; transition: transform 0.3s; }
+        .swiper-slide:not(.swiper-slide-active) { transform: scale(0.85); opacity: 0.6; }
+        .video-wrapper { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; width: 100%; border-radius: 8px; }
+        .video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+        .swiper-button-next, .swiper-button-prev { color: var(--primary-color); }
+        .swiper-pagination-bullet-active { background: var(--primary-color); }
+        .main-footer { text-align: center; padding: 2rem; background-color: rgba(0,0,0,0.2); }
+        .social-links { list-style: none; padding: 0; margin: 0 0 1rem 0; display: flex; justify-content: center; gap: 1.5rem; }
+        .social-links a { color: var(--neutral-light); text-decoration: none; font-size: 1.5rem; transition: color 0.2s; }
+        .social-links a:hover { color: var(--primary-color); }
+        
+        @media (max-width: 980px) { 
+            #input-staff { grid-template-columns: repeat(2, auto); }
+            #input-staff .measure:nth-of-type(4n)::after { display: block; }
+            #input-staff .measure:nth-of-type(2n)::after { display: none; }
         }
-
-        @media print {
-            body {
-                background-color: #fff !important; color: #000 !important; padding: 0.5in !important;
-                display: block !important;
-            }
-            h2, h3:not(.print-title), .controls, #input-staff, .download-section {
-                display: none !important;
-            }
-            .container { width: 100% !important; margin: 0 !important; padding: 0 !important; }
-            
-            /* YENİ: PDF başlığını görünür yap ve stillendir */
-            #print-header {
-                display: flex;
-                justify-content: space-between;
-                align-items: baseline;
-                border-bottom: 2px solid #000;
-                padding-bottom: 10px;
-                margin-bottom: 30px;
-                font-family: sans-serif;
-            }
-            #print-header-main { font-size: 18pt; font-weight: bold; }
-            #print-header-user { font-size: 14pt; }
-            
-            #output {
-                border: none !important; box-shadow: none !important; width: 100% !important;
-                padding: 0 !important; background: transparent !important;
-            }
-            .sticking-group-container h3 {
-                display: block !important; color: #000 !important;
-                border-bottom: 1px solid #ccc !important; font-size: 14pt !important;
-            }
-            .sticking-group-container .line { font-size: 12pt !important; color: #000 !important; }
-            .note.accent {
-                color: #000 !important; font-weight: bold !important;
-                text-decoration: underline; text-decoration-thickness: 2px;
-            }
-            .bar-line { color: #000 !important; }
+        @media (max-width: 768px) { 
+            .main-header { flex-direction: column; text-align: center; gap: 1rem; } 
+            .header-brand { align-items: center; }
+        }
+        @media (max-width: 520px) {
+            h2 { font-size: 2rem; }
+            section { padding: 3rem 1rem; }
+            #input-staff { grid-template-columns: repeat(1, auto); }
+            #input-staff .measure:nth-of-type(2n)::after { display: block; }
+            #input-staff .measure:not(:last-child)::after { display: block; }
+            #input-staff .measure:last-child::after { display: none; }
+            .controls { flex-direction: column; gap: 1rem; }
+            .control-select { margin-left: 0; }
+            .swiper-slide { width: 90%; }
         }
     </style>
 </head>
 <body>
-    <div id="print-header"></div>
-
-    <div class="container">
-        <h2>🥁 ACCENTS & REBOUNDS ULTIMATE 🥁</h2>
-        
-        <h3>1. Create Melody (Choose Accents):</h3>
-        <div class="controls">
-            <div>
-                <button id="btn-4" class="control-btn active">4 Bar</button>
-                <button id="btn-8" class="control-btn">8 Bar</button>
-                <button id="btn-12" class="control-btn">12 Bar</button>
+    <header class="main-header">
+        <div class="header-brand">
+            <h1 class="brand-name">Batuhan Toyhan</h1>
+            <p class="brand-titles">Drummer | Producer | Educator</p>
+        </div>
+        <nav class="main-nav">
+            <ul>
+                <li><a href="#app">A&R+</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#videos">Videos</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section id="app">
+            <div class="section-content">
+                <div class="container">
+                    <h2>A&R+</h2>
+                    <h3>1. Create Melody</h3>
+                    <div class="controls">
+                        <div>
+                            <button id="btn-4" class="control-btn active">4 Bar</button>
+                            <button id="btn-8" class="control-btn">8 Bar</button>
+                            <button id="btn-12" class="control-btn">12 Bar</button>
+                        </div>
+                        <select id="preset-select" class="control-select"></select>
+                    </div>
+                    <div id="input-staff"></div>
+                    <h3>2. Stickings</h3>
+                    <div id="output"></div>
+                </div>
             </div>
-            <select id="preset-select" class="control-select"></select>
-        </div>
-        <div id="input-staff"></div>
+        </section>
+        <section id="about">
+            <div class="section-content"> <h2>About Me</h2> <p>Buraya kendini tanıtan yazıyı yazabilirsin.</p> </div>
+        </section>
+        <section id="videos" style="background-color: rgba(0,0,0,0.1);">
+            <div class="section-content">
+                <h2>My Videos</h2>
+                <div class="swiper mySwiper">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide"> <div class="video-wrapper"> <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="YouTube video player" frameborder="0" allowfullscreen></iframe> </div> </div>
+                        <div class="swiper-slide"> <div class="video-wrapper"> <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="YouTube video player" frameborder="0" allowfullscreen></iframe> </div> </div>
+                    </div>
+                    <div class="swiper-button-next"></div> <div class="swiper-button-prev"></div> <div class="swiper-pagination"></div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer id="contact" class="main-footer">
+        <h3>Contact & Support</h3>
+        <p>You can reach me out on my social media channels or support my work.</p>
+        <ul class="social-links">
+            <li><a href="#" target="_blank" title="YouTube">YT</a></li> <li><a href="#" target="_blank" title="Instagram">IG</a></li> <li><a href="#" target="_blank" title="GitHub">GH</a></li> <li><a href="#" target="_blank" title="Spotify">SP</a></li> <li><a href="#" target="_blank" title="Ko-fi">KF</a></li> <li><a href="#" target="_blank" title="Patreon">PT</a></li>
+        </ul>
+        <p>© 2025 Batuhan Toyhan. All Rights Reserved.</p>
+    </footer>
 
-        <h3>2. Stickings</h3>
-        <div id="output"></div>
-
-        <div class="download-section">
-            <input type="text" id="pdf-title-input" class="filename-input" placeholder="Enter Exercise Title for PDF...">
-            <button id="btn-download-pdf" class="control-btn">Download PDF</button>
-        </div>
-    </div>
-
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script>
     const maxNotes = 96;
     const generateGroupingPattern = (groupSize) => { const pattern = []; for (let i = 0; i < maxNotes; i++) { pattern.push(i % groupSize === 0 ? 1 : 0); } return pattern; };
@@ -245,38 +202,46 @@
     const notesPerRow = notesPerMeasure * 4;
     let currentTotalMeasures = 4;
     let userAccents = [];
-    
     const staffContainer = document.getElementById('input-staff');
     const outputDiv = document.getElementById('output');
     const buttons = [ document.getElementById('btn-4'), document.getElementById('btn-8'), document.getElementById('btn-12') ];
     const presetSelect = document.getElementById('preset-select');
-    const btnDownloadPdf = document.getElementById('btn-download-pdf');
-    const pdfTitleInput = document.getElementById('pdf-title-input'); // Yeni input
-    const printHeader = document.getElementById('print-header'); // Yeni görünmez div
-
+    
     function renderExercise() {
+        if (!outputDiv) return;
         const totalNotes = notesPerMeasure * currentTotalMeasures;
         let finalHtmlOutput = ""; 
         for (const group of stickingGroups) {
             finalHtmlOutput += `<div class="sticking-group-container">`;
-            finalHtmlOutput += `<h3 class="print-title">${group.title}</h3>`;
+            finalHtmlOutput += `<h3>${group.title}</h3>`;
             const patternKeys = Object.keys(group.patterns);
             patternKeys.forEach((key, index) => {
                 const stickingPattern = group.patterns[key];
                 let fullStickingSequence = "";
                 for (let i = 0; i < totalNotes; i++) { fullStickingSequence += stickingPattern[i % stickingPattern.length]; }
-                let currentLineHtml = '<div class="line">';
-                for (let i = 0; i < fullStickingSequence.length; i++) {
-                    const note = fullStickingSequence[i];
-                    const noteClass = userAccents[i] === 1 ? "note accent" : "note";
-                    currentLineHtml += `<span class="${noteClass}">${note}</span>`;
-                    if ((i + 1) % notesPerRow === 0 && i < totalNotes - 1) { currentLineHtml += '</div>'; finalHtmlOutput += currentLineHtml; currentLineHtml = '<div class="line">'; }
-                    else if ((i + 1) % notesPerMeasure === 0 && i < totalNotes - 1) { currentLineHtml += '<span class="bar-line">|</span>'; } 
-                    else if ((i + 1) % 4 === 0) { currentLineHtml += '<span class="sub-spacer"></span>'; }
+                
+                let lines = [];
+                for (let i = 0; i < fullStickingSequence.length; i += notesPerRow) {
+                    lines.push(fullStickingSequence.substring(i, i + notesPerRow));
                 }
-                currentLineHtml += '</div>';
-                finalHtmlOutput += currentLineHtml;
-                if(index < patternKeys.length - 1) { finalHtmlOutput += '<div class="variation-spacer"></div>'; }
+                
+                lines.forEach((line, lineIndex) => {
+                    let currentLineHtml = '<div class="line">';
+                    for (let i = 0; i < line.length; i++) {
+                        const globalIndex = lineIndex * notesPerRow + i;
+                        const note = line[i];
+                        const noteClass = userAccents[globalIndex] === 1 ? "note accent" : "note";
+                        currentLineHtml += `<span class="${noteClass}">${note}</span>`;
+                        if ((i + 1) % notesPerMeasure === 0 && i < line.length - 1) { currentLineHtml += '<span class="bar-line">|</span>'; } 
+                        else if ((i + 1) % 4 === 0) { currentLineHtml += '<span class="sub-spacer"></span>'; }
+                    }
+                    currentLineHtml += '</div>';
+                    finalHtmlOutput += currentLineHtml;
+                });
+                
+                if (index < patternKeys.length - 1) {
+                    finalHtmlOutput += '<div class="variation-spacer"></div>';
+                }
             });
             finalHtmlOutput += `</div>`;
         }
@@ -284,6 +249,7 @@
     }
 
     function createInputStaff() {
+        if (!staffContainer) return;
         staffContainer.innerHTML = ''; 
         const totalNotes = notesPerMeasure * currentTotalMeasures;
         userAccents = new Array(totalNotes).fill(0);
@@ -292,19 +258,11 @@
             const measureDiv = document.createElement('div');
             measureDiv.classList.add('measure');
             for (let n = 0; n < notesPerMeasure; n++) {
-                const noteContainer = document.createElement('div');
-                noteContainer.classList.add('note-container');
-                noteContainer.dataset.index = noteCounter;
-                const accentMark = document.createElement('div');
-                accentMark.classList.add('accent-mark');
-                accentMark.innerHTML = '&gt;';
-                const noteHead = document.createElement('div');
-                noteHead.classList.add('note-head');
-                const noteStem = document.createElement('div');
-                noteStem.classList.add('note-stem');
-                noteContainer.appendChild(accentMark);
-                noteContainer.appendChild(noteHead);
-                noteContainer.appendChild(noteStem);
+                const noteContainer = document.createElement('div'); noteContainer.classList.add('note-container'); noteContainer.dataset.index = noteCounter;
+                const accentMark = document.createElement('div'); accentMark.classList.add('accent-mark'); accentMark.innerHTML = '>';
+                const noteHead = document.createElement('div'); noteHead.classList.add('note-head');
+                const noteStem = document.createElement('div'); noteStem.classList.add('note-stem');
+                noteContainer.appendChild(accentMark); noteContainer.appendChild(noteHead); noteContainer.appendChild(noteStem);
                 noteContainer.addEventListener('click', () => {
                     noteContainer.classList.toggle('accented');
                     const noteIndex = parseInt(noteContainer.dataset.index);
@@ -315,54 +273,57 @@
                 measureDiv.appendChild(noteContainer);
                 noteCounter++;
             }
-            const beam1 = document.createElement('div');
-            beam1.classList.add('beam', 'first-group');
-            const beam2 = document.createElement('div');
-            beam2.classList.add('beam', 'second-group');
-            measureDiv.appendChild(beam1);
-            measureDiv.appendChild(beam2);
+            const beam1 = document.createElement('div'); beam1.classList.add('beam', 'first-group');
+            const beam2 = document.createElement('div'); beam2.classList.add('beam', 'second-group');
+            measureDiv.appendChild(beam1); measureDiv.appendChild(beam2);
             staffContainer.appendChild(measureDiv);
         }
     }
     
     function syncStaffUI() { const allNotes = staffContainer.querySelectorAll('.note-container'); allNotes.forEach((noteDiv, index) => { if (userAccents[index] === 1) { noteDiv.classList.add('accented'); } else { noteDiv.classList.remove('accented'); } }); }
     function applyPreset(presetName) { const presetPattern = melodyPresets[presetName]; const totalNotes = currentTotalMeasures * notesPerMeasure; for (let i = 0; i < totalNotes; i++) { userAccents[i] = presetPattern[i] || 0; } syncStaffUI(); renderExercise(); }
-    function populatePresetSelector() { for (const name in melodyPresets) { const option = document.createElement('option'); option.value = name; option.textContent = name; presetSelect.appendChild(option); } }
+    function populatePresetSelector() { if(!presetSelect) return; presetSelect.innerHTML = ''; for (const name in melodyPresets) { const option = document.createElement('option'); option.value = name; option.textContent = name; presetSelect.appendChild(option); } }
     
     function initializeApp() {
-        createInputStaff();
-        renderExercise(); 
-        const staffWidth = staffContainer.offsetWidth;
-        outputDiv.style.width = `${staffWidth}px`;
-        presetSelect.value = "Custom (Clear)";
+        if (document.getElementById('input-staff')) {
+            createInputStaff();
+            renderExercise(); 
+            // DİKKAT: Genişlik eşitleme kodunu kaldırdık, artık gerek yok.
+        }
     }
     
-    buttons.forEach(button => {
-        button.addEventListener('click', (e) => {
-            buttons.forEach(btn => btn.classList.remove('active'));
-            e.target.classList.add('active');
-            currentTotalMeasures = parseInt(e.target.id.split('-')[1]);
-            initializeApp();
-        });
-    });
-
-    presetSelect.addEventListener('change', (e) => {
-        applyPreset(e.target.value);
-    });
-
-    // YENİ: PDF indirme butonu mantığı güncellendi
-    btnDownloadPdf.addEventListener('click', () => {
-        const userTitle = pdfTitleInput.value.trim() || "My Awesome Exercise";
-        
-        // Ekranda görünmeyen başlık div'ini doldur
-        printHeader.innerHTML = `<span id="print-header-main">A&R+</span> <span id="print-header-user">${userTitle}</span>`;
-        
-        // Yazdırma işlemini tetikle
-        window.print();
-    });
+    buttons.forEach(button => { button.addEventListener('click', (e) => { buttons.forEach(btn => btn.classList.remove('active')); e.target.classList.add('active'); currentTotalMeasures = parseInt(e.target.id.split('-')[1]); initializeApp(); }); });
+    presetSelect.addEventListener('change', (e) => { applyPreset(e.target.value); });
     
     populatePresetSelector();
     initializeApp();
+
+    var swiper = new Swiper(".mySwiper", {
+        slidesPerView: "auto",
+        centeredSlides: true,
+        spaceBetween: 20,
+        loop: true,
+        navigation: { nextEl: ".swiper-button-next", prevEl: ".swiper-button-prev", },
+        pagination: { el: ".swiper-pagination", clickable: true, },
+    });
+    
+    let lastScrollTop = 0;
+    const header = document.querySelector('.main-header');
+    window.addEventListener("scroll", function() {
+        if (!header) return;
+        let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        if (scrollTop > lastScrollTop && scrollTop > header.offsetHeight) {
+            header.classList.add('hidden');
+        } else {
+            header.classList.remove('hidden');
+        }
+        lastScrollTop = scrollTop <= 0 ? 0 : scrollTop; 
+    }, false);
+
+    // DÜZELTME: Sayfanın otomatik kayma hatasını çözen kod
+    window.addEventListener('load', () => {
+        setTimeout(() => window.scrollTo(0, 0), 1);
+    });
     </script>
 </body>
 </html>
