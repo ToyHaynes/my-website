@@ -11,12 +11,12 @@
     <style>
         /* YENİ TEMA: MODERN MAVİ */
         :root {
-            /* Yeni Renk Paleti */
-            --bg-color: #0d1b2a;         /* Gece Mavisi (Arka Plan) */
-            --container-bg: #1b263b;   /* Koyu Mavi (Kutular) */
-            --text-color: #e0e1dd;       /* Kırık Beyaz (Metinler) */
-            --primary-color: #38bdf8;    /* Elektrik Mavisi (Vurgu Rengi) */
-            --neutral-color: #778da9;    /* Gri-Mavi (Nötr/Kenarlık) */
+            --bg-color: #121212;         /* Kömür Siyahı (Arka Plan) */
+            --container-bg: #1e1e1e;   /* Daha Açık Siyah (Kutular) */
+            --text-color: #f5f5f5;       /* Kırık Beyaz (Ana Metin) */
+            --primary-color: #ffffff;    /* Saf Beyaz (Ana Vurgu Rengi) */
+            --neutral-color: #9e9e9e;    /* Orta Gri (İkincil Metin/Kenarlık) */
+            --accent-yellow: #e3b23c;
             
             /* Font Değişkeni */
             --font-main: 'Outfit', sans-serif;
@@ -36,8 +36,8 @@
             padding: 0; margin: 0;
         }
         .main-header {
-            background-color: rgba(13, 27, 42, 0.7);
-            padding: 1rem 2rem;
+            background-color: rgba(0, 0, 0, 0.5); /* YENİ HALİ */
+            padding: 1rem 15vw;;
             position: sticky;
             top: 0;
             z-index: 1000;
@@ -122,7 +122,7 @@
         .about-photo img { width: 100%; height: auto; display: block; border-radius: 8px; }
         .about-text { flex-basis: 65%; }
         .about-text h2 { text-align: left; border-bottom: 1px solid var(--neutral-color); padding-bottom: 8px; margin-bottom: 1.5rem; margin-top: 0; color: var(--text-color);}
-        .about-text p { font-family: var(--font-main); font-size: 1.1rem; line-height: 1.7; margin-top: 0; margin-bottom: 1rem; font-weight: 400;}
+        .about-text p { font-family: var(--font-main); font-size: 1rem; line-height: 1.7; margin-top: 0; margin-bottom: 1rem; font-weight: 100;}
 
         .swiper { width: 100%; height: 100%; padding: 10px 0 40px 0; }
         .swiper-slide { text-align: center; font-size: 18px; background: transparent; display: flex; justify-content: center; align-items: center; width: 70%; transition: transform 0.3s, opacity 0.3s; }
@@ -131,6 +131,12 @@
         .video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
         .swiper-button-next, .swiper-button-prev { color: var(--primary-color); }
         .swiper-pagination-bullet-active { background: var(--primary-color); }
+
+        /* Müzik Karosel Stilleri */
+        .music-swiper { padding: 10px 0 40px 0; }
+        .music-swiper .swiper-slide { width: 300px; /* Spotify için sabit genişlik daha iyi */ }
+        .music-swiper iframe { border-radius: 12px; }
+
         .main-footer { text-align: center; padding: 2rem; background-color: var(--container-bg); }
         .social-links { list-style: none; padding: 0; margin: 0 0 1rem 0; display: flex; justify-content: center; gap: 1.5rem; }
         .social-links a { color: var(--neutral-color); text-decoration: none; font-size: 1rem; transition: color 0.2s; }
@@ -142,6 +148,25 @@
             font-size: 0.8rem; /* Puntoyu küçültür */
             color: #778da9; /* Rengi daha soluk yapar */
             font-family: var(--font-main);
+        }
+
+        /* --- Aksan Renkleri --- */
+
+        /* 1. Melodi Oluşturma Kısmındaki Aksanlar */
+        .accent-mark {
+            color: var(--accent-yellow);
+        }
+        .note-container.accented .note-head,
+        .note-container.accented .note-stem {
+            background-color: var(--accent-yellow);
+        }
+
+        /* 2. Sonuçlar Kısmındaki Aksanlı Harfler */
+        .note.accent {
+            background-color: transparent;
+            color: var(--accent-yellow);
+            font-weight: bold;
+            text-transform: uppercase;
         }
         
         @media (max-width: 980px) { #input-staff { grid-template-columns: repeat(2, auto); } #input-staff .measure:nth-of-type(4n)::after { display: block; } #input-staff .measure:nth-of-type(2n)::after { display: none; } }
@@ -163,7 +188,6 @@
     <header class="main-header">
         <div class="header-brand">
             <h1 class="brand-name">Batuhan Toyhan</h1>
-            <p class="brand-titles">Drummer | Producer | Educator</p>
         </div>
         <nav class="main-nav">
             <ul>
@@ -194,6 +218,35 @@
                 </div>
             </div>
         </section>
+        <section id="music" style="background-color: rgba(0,0,0,0.1);">
+            <div class="section-content">
+                <div class="swiper music-swiper">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            <iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/1NwGAxPXtrkwV0L1BRVzUX?utm_source=generator" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="eager"></iframe>
+                        </div>
+                        <div class="swiper-slide">
+                            <iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/track/1RbI7dkQOydykqG3bEfmo4?utm_source=generator" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="eager"></iframe>
+                        </div>
+                        <div class="swiper-slide">
+                            <iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/track/6G8dPIcHPYtzwbbjO3e3I4?utm_source=generator" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="eager"></iframe>
+                        </div>
+                        <div class="swiper-slide">
+                            <iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/track/29As285yRxiVyjdckLjgFz?utm_source=generator" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="eager"></iframe>
+                        </div>
+                        <div class="swiper-slide">
+                            <iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/track/2GjTDWl8pNLGeVn8gTjfVG?utm_source=generator" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="eager"></iframe>
+                        </div>
+                        <div class="swiper-slide">
+                            <iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/track/4ilZQhzoBg1QWZTl2xQhdI?utm_source=generator" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+                        </div>
+                         </div>
+                    <div class="swiper-button-next"></div>
+                    <div class="swiper-button-prev"></div>
+                    <div class="swiper-pagination"></div>
+                </div>
+            </div>
+        </section>
        <section id="about" style="background-color: var(--container-bg);">
             <div class="section-content">
                 <div class="about-container">
@@ -203,16 +256,13 @@
                     <div class="about-text">
                         <h2>About Me</h2>
                         <p>
-                            I am a multidisciplinary artist working across jazz drums, sound
-                            design, video production, and real-time audiovisual systems. My
-                            practice blends improvisation, rhythm, image, and narrative — from
-                            live jazz performances to full-cycle documentary production, from
-                            lo-fi beatmaking to interactive visuals using TouchDesigner and
-                            Ableton.
+                            I am a multidisciplinary artist dedicated to exploring the intersection of rhythm, sound, and image. My journey began with a focus on jazz drums, studying under the guidance of Emre Kartari at Yaşar University's Jazz Performance department. While jazz remains my core discipline, my professional experience over the last 15 years has spanned a wide musical spectrum, from the raw energy of punk-rock to the nuanced world of electronic sufism.
                         </p>
                         <p>
-                            I explore the intersection of sound and image through both
-                            technical precision and intuitive expression.
+                            This diverse musical foundation sparked a deeper curiosity for sound itself, leading me into the world of production. In my solo project, Mindown, I delve into sampling and sound design, crafting entire sonic landscapes from scratch. This work has led to professional opportunities, including creating the intro jingle and handling sound recording for the popular YouTube show Katarsis, as well as contributing to various documentary projects.
+                        </p>
+                        <p>
+                            My current artistic practice focuses on translating rhythm into a visual language in my personal performances. My approach to education, in turn, transforms this exploration into a methodology for the student: Modern systems I've developed, like A&R+ and ToT+, use classic drum methods as a starting point. My goal is not to teach a standard curriculum, but to challenge every student to push their own limits, create their own curriculum in the process, and ultimately, build their own authentic rhythmic identity.
                         </p>
                     </div>
                 </div>
@@ -247,6 +297,7 @@
                 </div>
             </div>
         </section>
+         
     </main>
     <footer id="contact" class="main-footer">
         <h3>Contact & Support</h3>
@@ -259,7 +310,17 @@
 
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script>
-    const maxNotes=96;const generateGroupingPattern=t=>{const e=[];for(let o=0;o<maxNotes;o++)e.push(o%t==0?1:0);return e};const melodyPresets={"Custom (Clear)":[],"2-Note Grouping":generateGroupingPattern(2),"3-Note Grouping":generateGroupingPattern(3),"4-Note Grouping":generateGroupingPattern(4),"5-Note Grouping":generateGroupingPattern(5),"6-Note Grouping":generateGroupingPattern(6),"7-Note Grouping":generateGroupingPattern(7)};const stickingGroups=[{title:"Single",patterns:{R:"rlrl",L:"lrlr"}},{title:"Double",patterns:{R:"rrll",L:"llrr"}},{title:"Inverted Double",patterns:{R:"rllr",L:"lrrl"}},{title:"Paradiddle",patterns:{R:"rlrrlrll",L:"lrllrllr"}},{title:"Paradiddle Inversion no:1",patterns:{R:"rllrlrrl",L:"lrrlrllr"}},{title:"Paradiddle Inversion no:2",patterns:{R:"rrlrllrl",L:"llrllr"}},{title:"Four Stroke Rolls",patterns:{R:"rrrrllll",L:"llllrrrr"}},{title:"Single Hand Patterns",patterns:{R:"rrrr",L:"llll"}}];const notesPerMeasure=8,notesPerRow=4*notesPerMeasure;let currentTotalMeasures=4,userAccents=[];const staffContainer=document.getElementById("input-staff"),outputDiv=document.getElementById("output"),buttons=[document.getElementById("btn-4"),document.getElementById("btn-8"),document.getElementById("btn-12")],presetSelect=document.getElementById("preset-select");function renderExercise(){if(!outputDiv)return;const t=notesPerMeasure*currentTotalMeasures;let e="";for(const o of stickingGroups){e+=`<div class="sticking-group-container"><h3>${o.title}</h3>`;const n=Object.keys(o.patterns);n.forEach((s,a)=>{let l="";for(let e=0;e<t;e++)l+=o.patterns[s][e%o.patterns[s].length];let r=[];for(let t=0;t<l.length;t+=notesPerRow)r.push(l.substring(t,t+notesPerRow));r.forEach((t,o)=>{let n='<div class="line">';for(let e=0;e<t.length;e++){const s=o*notesPerRow+e,a=t[e],l=userAccents[s]===1?"note accent":"note";n+=`<span class="${l}">${a}</span>`,(e+1)%notesPerMeasure==0&&e<t.length-1?n+='<span class="bar-line">|</span>':(e+1)%4==0&&(n+='<span class="sub-spacer"></span>')}n+="</div>",e+=n}),a<n.length-1&&(e+='<div class="variation-spacer"></div>')}),e+="</div>"}outputDiv.innerHTML=e}function createInputStaff(){if(!staffContainer)return;staffContainer.innerHTML="";const t=notesPerMeasure*currentTotalMeasures;userAccents=new Array(t).fill(0);let e=0;for(let o=0;o<currentTotalMeasures;o++){const n=document.createElement("div");n.classList.add("measure");for(let s=0;s<notesPerMeasure;s++){const a=document.createElement("div");a.classList.add("note-container"),a.dataset.index=e;const l=document.createElement("div");l.classList.add("accent-mark"),l.innerHTML=">";const r=document.createElement("div");r.classList.add("note-head");const c=document.createElement("div");c.classList.add("note-stem"),a.appendChild(l),a.appendChild(r),a.appendChild(c),a.addEventListener("click",()=>{a.classList.toggle("accented");const t=parseInt(a.dataset.index);userAccents[t]=userAccents[t]===0?1:0,renderExercise(),presetSelect.value="Custom (Clear)"}),n.appendChild(a),e++}const s=document.createElement("div");s.classList.add("beam","first-group");const a=document.createElement("div");a.classList.add("beam","second-group"),n.appendChild(s),n.appendChild(a),staffContainer.appendChild(n)}}function syncStaffUI(){const t=staffContainer.querySelectorAll(".note-container");t.forEach((t,e)=>{userAccents[e]===1?t.classList.add("accented"):t.classList.remove("accented")})}function applyPreset(t){const e=melodyPresets[t],o=currentTotalMeasures*notesPerMeasure;for(let t=0;t<o;t++)userAccents[t]=e[t]||0;syncStaffUI(),renderExercise()}function populatePresetSelector(){if(!presetSelect)return;presetSelect.innerHTML="";for(const t in melodyPresets){const e=document.createElement("option");e.value=t,e.textContent=t,presetSelect.appendChild(e)}}function initializeApp(){document.getElementById("input-staff")&&(createInputStaff(),renderExercise())}buttons.forEach(t=>{t.addEventListener("click",e=>{buttons.forEach(t=>t.classList.remove("active")),e.target.classList.add("active"),currentTotalMeasures=parseInt(e.target.id.split("-")[1]),initializeApp()})}),presetSelect.addEventListener("change",t=>{applyPreset(t.target.value)}),populatePresetSelector(),initializeApp();var swiper=new Swiper(".mySwiper",{slidesPerView:"auto",centeredSlides:!0,spaceBetween:20,loop:!0,navigation:{nextEl:".swiper-button-next",prevEl:".swiper-button-prev"},pagination:{el:".swiper-pagination",clickable:!0}});let lastScrollTop=0;const header=document.querySelector(".main-header");window.addEventListener("scroll",function(){if(!header)return;let t=window.pageYOffset||document.documentElement.scrollTop;t>lastScrollTop&&t>header.offsetHeight?header.classList.add("hidden"):header.classList.remove("hidden"),lastScrollTop=t<=0?0:t},!1),window.addEventListener("load",()=>{setTimeout(()=>window.scrollTo(0,0),1)});
+    const maxNotes=96;const generateGroupingPattern=t=>{const e=[];for(let o=0;o<maxNotes;o++)e.push(o%t==0?1:0);return e};const melodyPresets={"Custom (Clear)":[],"2-Note Grouping":generateGroupingPattern(2),"3-Note Grouping":generateGroupingPattern(3),"4-Note Grouping":generateGroupingPattern(4),"5-Note Grouping":generateGroupingPattern(5),"6-Note Grouping":generateGroupingPattern(6),"7-Note Grouping":generateGroupingPattern(7)};const stickingGroups=[{title:"Single",patterns:{R:"rlrl",L:"lrlr"}},{title:"Double",patterns:{R:"rrll",L:"llrr"}},{title:"Inverted Double",patterns:{R:"rllr",L:"lrrl"}},{title:"Paradiddle",patterns:{R:"rlrrlrll",L:"lrllrllr"}},{title:"Paradiddle Inversion no:1",patterns:{R:"rllrlrrl",L:"lrrlrllr"}},{title:"Paradiddle Inversion no:2",patterns:{R:"rrlrllrl",L:"llrllr"}},{title:"Four Stroke Rolls",patterns:{R:"rrrrllll",L:"llllrrrr"}},{title:"Single Hand Patterns",patterns:{R:"rrrr",L:"llll"}}];const notesPerMeasure=8,notesPerRow=4*notesPerMeasure;let currentTotalMeasures=4,userAccents=[];const staffContainer=document.getElementById("input-staff"),outputDiv=document.getElementById("output"),buttons=[document.getElementById("btn-4"),document.getElementById("btn-8"),document.getElementById("btn-12")],presetSelect=document.getElementById("preset-select");function renderExercise(){if(!outputDiv)return;const t=notesPerMeasure*currentTotalMeasures;let e="";for(const o of stickingGroups){e+=`<div class="sticking-group-container"><h3>${o.title}</h3>`;const n=Object.keys(o.patterns);n.forEach((s,a)=>{let l="";for(let e=0;e<t;e++)l+=o.patterns[s][e%o.patterns[s].length];let r=[];for(let t=0;t<l.length;t+=notesPerRow)r.push(l.substring(t,t+notesPerRow));r.forEach((t,o)=>{let n='<div class="line">';for(let e=0;e<t.length;e++){const s=o*notesPerRow+e,a=t[e],l=userAccents[s]===1?"note accent":"note";n+=`<span class="${l}">${a}</span>`,(e+1)%notesPerMeasure==0&&e<t.length-1?n+='<span class="bar-line">|</span>':(e+1)%4==0&&(n+='<span class="sub-spacer"></span>')}n+="</div>",e+=n}),a<n.length-1&&(e+='<div class="variation-spacer"></div>')}),e+="</div>"}outputDiv.innerHTML=e}function createInputStaff(){if(!staffContainer)return;staffContainer.innerHTML="";const t=notesPerMeasure*currentTotalMeasures;userAccents=new Array(t).fill(0);let e=0;for(let o=0;o<currentTotalMeasures;o++){const n=document.createElement("div");n.classList.add("measure");for(let s=0;s<notesPerMeasure;s++){const a=document.createElement("div");a.classList.add("note-container"),a.dataset.index=e;const l=document.createElement("div");l.classList.add("accent-mark"),l.innerHTML=">";const r=document.createElement("div");r.classList.add("note-head");const c=document.createElement("div");c.classList.add("note-stem"),a.appendChild(l),a.appendChild(r),a.appendChild(c),a.addEventListener("click",()=>{a.classList.toggle("accented");const t=parseInt(a.dataset.index);userAccents[t]=userAccents[t]===0?1:0,renderExercise(),presetSelect.value="Custom (Clear)"}),n.appendChild(a),e++}const s=document.createElement("div");s.classList.add("beam","first-group");const a=document.createElement("div");a.classList.add("beam","second-group"),n.appendChild(s),n.appendChild(a),staffContainer.appendChild(n)}}function syncStaffUI(){const t=staffContainer.querySelectorAll(".note-container");t.forEach((t,e)=>{userAccents[e]===1?t.classList.add("accented"):t.classList.remove("accented")})}function applyPreset(t){const e=melodyPresets[t],o=currentTotalMeasures*notesPerMeasure;for(let t=0;t<o;t++)userAccents[t]=e[t]||0;syncStaffUI(),renderExercise()}function populatePresetSelector(){if(!presetSelect)return;presetSelect.innerHTML="";for(const t in melodyPresets){const e=document.createElement("option");e.value=t,e.textContent=t,presetSelect.appendChild(e)}}function initializeApp(){document.getElementById("input-staff")&&(createInputStaff(),renderExercise())}buttons.forEach(t=>{t.addEventListener("click",e=>{buttons.forEach(t=>t.classList.remove("active")),e.target.classList.add("active"),currentTotalMeasures=parseInt(e.target.id.split("-")[1]),initializeApp()})}),presetSelect.addEventListener("change",t=>{applyPreset(t.target.value)}),populatePresetSelector(),initializeApp();var swiper=new Swiper(".mySwiper",{slidesPerView:"auto",centeredSlides:!0,spaceBetween:20,loop:!0,navigation:{nextEl:".swiper-button-next",prevEl:".swiper-button-prev"},pagination:{el:".swiper-pagination",clickable:!0}});let lastScrollTop=0;const header=document.querySelector(".main-header");window.addEventListener("scroll",function(){if(!header)return;let t=window.pageYOffset||document.documentElement.scrollTop;t>lastScrollTop&&t>header.offsetHeight?header.classList.add("hidden"):header.classList.remove("hidden"),lastScrollTop=t<=0?0:t},!1),window.addEventListener("load",()=>{setTimeout(()=>window.scrollTo(0,0),1)});var musicSwiper = new Swiper(".music-swiper", {
+        slidesPerView: "auto",
+        centeredSlides: true,
+        spaceBetween: 30, // Aralarındaki boşluk
+        loop: true,
+        navigation: {
+            nextEl: ".swiper-button-next",
+            prevEl: ".swiper-button-prev",
+        },
+    });
+    
     </script>
 </body>
 </html>
