@@ -60,7 +60,7 @@
             margin: 0;
             font-family: var(--font-main);
             font-size: 1.5rem;
-            color: var(--primary-color); /* Ana vurgu rengimiz (sarı/altın) ile değiştirdik */
+            color: var(--primary-color); 
             font-weight: 300;
         }
         .header-brand .brand-titles { margin: 0; font-family: var(--font-main); font-size: 0.8rem; color: var(--neutral-color); letter-spacing: 1px; }
@@ -68,6 +68,26 @@
         .main-nav a { color: var(--text-color); text-decoration: none; font-family: var(--font-main); font-weight: 500; transition: color 0.2s; }
         .main-nav a:hover { color: var(--primary-color); }
         
+        /* --- YENİ EKLENEN DİL DEĞİŞTİRİCİ STİLLERİ --- */
+        .lang-switcher {
+            margin-left: 2rem;
+            font-family: var(--font-main);
+            font-weight: 500;
+        }
+        .lang-switcher a {
+            color: var(--neutral-color);
+            text-decoration: none;
+            padding: 0.2rem 0.4rem;
+            transition: color 0.2s;
+        }
+        .lang-switcher a:hover {
+            color: var(--primary-color);
+        }
+        .lang-switcher a.active {
+            color: var(--accent-yellow);
+            font-weight: 700;
+        }
+        /* --- ------------------------------------ --- */
         
         section { padding: 4rem 2rem; }
         .section-content { max-width: 950px; margin: 0 auto; }
@@ -142,11 +162,11 @@
         .social-links a { color: var(--neutral-color); text-decoration: none; font-size: 1rem; transition: color 0.2s; }
         .social-links a:hover { color: var(--primary-color); }
         .main-footer p {
-            color: var(--neutral-light); /* Yazıyı daha soluk olan nötr renge çeviriyoruz */
+            color: var(--neutral-light);
         }
         .footer-description, .footer-copyright {
-            font-size: 0.8rem; /* Puntoyu küçültür */
-            color: #778da9; /* Rengi daha soluk yapar */
+            font-size: 0.8rem; 
+            color: #778da9; 
             font-family: var(--font-main);
         }
 
@@ -170,7 +190,7 @@
         }
         
         @media (max-width: 980px) { #input-staff { grid-template-columns: repeat(2, auto); } #input-staff .measure:nth-of-type(4n)::after { display: block; } #input-staff .measure:nth-of-type(2n)::after { display: none; } }
-        @media (max-width: 768px) { .main-header { flex-direction: column; text-align: center; gap: 1rem; } .header-brand { align-items: center; } .about-container { flex-direction: column; text-align: center; } }
+        @media (max-width: 768px) { .main-header { flex-direction: column; text-align: center; gap: 1rem; } .header-brand { align-items: center; } .about-container { flex-direction: column; text-align: center; } .lang-switcher { margin-left: 0; } }
         @media (max-width: 520px) {
             h2 { font-size: 2rem; }
             section { padding: 3rem 1rem; }
@@ -192,28 +212,33 @@
         <nav class="main-nav">
             <ul>
                 <li><a href="#app">A&R+</a></li>
-                <li><a href="#about">about</a></li>
-                <li><a href="#videos">videos</a></li>
-                <li><a href="#contact">contact</a></li>
+                <li><a href="#about" data-langkey="nav_about">about</a></li>
+                <li><a href="#videos" data-langkey="nav_videos">videos</a></li>
+                <li><a href="#contact" data-langkey="nav_contact">contact</a></li>
             </ul>
         </nav>
+        <div class="lang-switcher">
+            <a href="#" class="lang-link active" data-lang="en">EN</a>
+            <span>|</span>
+            <a href="#" class="lang-link" data-lang="tr">TR</a>
+        </div>
     </header>
     <main>
         <section id="app">
             <div class="section-content">
                 <div class="container">
                     <h2>A&R+</h2>
-                    <h3>1. Create Melody</h3>
+                    <h3 data-langkey="app_create_melody">1. Create Melody</h3>
                     <div class="controls">
                         <div>
-                            <button id="btn-4" class="control-btn active">4 Bar</button>
-                            <button id="btn-8" class="control-btn">8 Bar</button>
-                            <button id="btn-12" class="control-btn">12 Bar</button>
+                            <button id="btn-4" class="control-btn active" data-langkey="app_4_bar">4 Bar</button>
+                            <button id="btn-8" class="control-btn" data-langkey="app_8_bar">8 Bar</button>
+                            <button id="btn-12" class="control-btn" data-langkey="app_12_bar">12 Bar</button>
                         </div>
                         <select id="preset-select" class="control-select"></select>
                     </div>
                     <div id="input-staff"></div>
-                    <h3>2. Stickings</h3>
+                    <h3 data-langkey="app_stickings">2. Stickings</h3>
                     <div id="output"></div>
                 </div>
             </div>
@@ -240,7 +265,7 @@
                         <div class="swiper-slide">
                             <iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/track/4ilZQhzoBg1QWZTl2xQhdI?utm_source=generator" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
                         </div>
-                         </div>
+                    </div>
                     <div class="swiper-button-next"></div>
                     <div class="swiper-button-prev"></div>
                     <div class="swiper-pagination"></div>
@@ -254,14 +279,14 @@
                         <img src="images/batuhan-toyhan.jpg" alt="A photo of Batuhan Toyhan">
                     </div>
                     <div class="about-text">
-                        <h2>About Me</h2>
-                        <p>
+                        <h2 data-langkey="about_title">About Me</h2>
+                        <p data-langkey="about_p1">
                             I am a multidisciplinary artist dedicated to exploring the intersection of rhythm, sound, and image. My journey began with a focus on jazz drums, studying under the guidance of Emre Kartari at Yaşar University's Jazz Performance department. While jazz remains my core discipline, my professional experience over the last 15 years has spanned a wide musical spectrum, from the raw energy of punk-rock to the nuanced world of electronic sufism.
                         </p>
-                        <p>
+                        <p data-langkey="about_p2">
                             This diverse musical foundation sparked a deeper curiosity for sound itself, leading me into the world of production. In my solo project, Mindown, I delve into sampling and sound design, crafting entire sonic landscapes from scratch. This work has led to professional opportunities, including creating the intro jingle and handling sound recording for the popular YouTube show Katarsis, as well as contributing to various documentary projects.
                         </p>
-                        <p>
+                        <p data-langkey="about_p3">
                             My current artistic practice focuses on translating rhythm into a visual language in my personal performances. My approach to education, in turn, transforms this exploration into a methodology for the student: Modern systems I've developed, like A&R+ and ToT+, use classic drum methods as a starting point. My goal is not to teach a standard curriculum, but to challenge every student to push their own limits, create their own curriculum in the process, and ultimately, build their own authentic rhythmic identity.
                         </p>
                     </div>
@@ -269,7 +294,7 @@
             </div>
         </section>
         <section id="videos">
-            <div class="section-content">               
+             <div class="section-content">               
                 <div class="swiper mySwiper">
                     <div class="swiper-wrapper">
                         <div class="swiper-slide">
@@ -300,17 +325,194 @@
          
     </main>
     <footer id="contact" class="main-footer">
-        <h3>Contact & Support</h3>
-        <p class="footer-description">You can reach me out on my social media channels or support my work.</p>
+        <h3 data-langkey="contact_title">Contact & Support</h3>
+        <p class="footer-description" data-langkey="contact_desc">You can reach me out on my social media channels or support my work.</p>
         <ul class="social-links">
             <li><a href="https://www.youtube.com/channel/UCvekuqaqyAe53lzC2b6NR1w" target="_blank" title="YouTube">YOUTUBE</a></li> <li><a href="instagram.com/batuhantoyhan" target="_blank" title="Instagram">INSTAGRAM</a></li> <li><a href="https://open.spotify.com/artist/0orq0FTDo9vCcUYQNG3exs?si=vME_AbL9QluZ2-kxsoOlLA" target="_blank" title="Spotify">SPOTIFY</a></li> <li><a href="https://mindownbeats.bandcamp.com" target="_blank" title="Bandcamp">BANDCAMP</a></li><li><a href="#" target="_blank" title="Ko-fi">KO-FI</a></li> <li><a href="#" target="_blank" title="Patreon">PATREON</a></li>
         </ul>
-        <p class="footer-copyright">© 2025 Batuhan Toyhan. All Rights Reserved.</p>
+        <p class="footer-copyright" data-langkey="footer_copyright">© 2025 Batuhan Toyhan. All Rights Reserved.</p>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    
     <script>
-    const maxNotes=96;const generateGroupingPattern=t=>{const e=[];for(let o=0;o<maxNotes;o++)e.push(o%t==0?1:0);return e};const melodyPresets={"Custom (Clear)":[],"2-Note Grouping":generateGroupingPattern(2),"3-Note Grouping":generateGroupingPattern(3),"4-Note Grouping":generateGroupingPattern(4),"5-Note Grouping":generateGroupingPattern(5),"6-Note Grouping":generateGroupingPattern(6),"7-Note Grouping":generateGroupingPattern(7)};const stickingGroups=[{title:"Single",patterns:{R:"rlrl",L:"lrlr"}},{title:"Double",patterns:{R:"rrll",L:"llrr"}},{title:"Inverted Double",patterns:{R:"rllr",L:"lrrl"}},{title:"Paradiddle",patterns:{R:"rlrrlrll",L:"lrllrllr"}},{title:"Paradiddle Inversion no:1",patterns:{R:"rllrlrrl",L:"lrrlrllr"}},{title:"Paradiddle Inversion no:2",patterns:{R:"rrlrllrl",L:"llrllr"}},{title:"Four Stroke Rolls",patterns:{R:"rrrrllll",L:"llllrrrr"}},{title:"Single Hand Patterns",patterns:{R:"rrrr",L:"llll"}}];const notesPerMeasure=8,notesPerRow=4*notesPerMeasure;let currentTotalMeasures=4,userAccents=[];const staffContainer=document.getElementById("input-staff"),outputDiv=document.getElementById("output"),buttons=[document.getElementById("btn-4"),document.getElementById("btn-8"),document.getElementById("btn-12")],presetSelect=document.getElementById("preset-select");function renderExercise(){if(!outputDiv)return;const t=notesPerMeasure*currentTotalMeasures;let e="";for(const o of stickingGroups){e+=`<div class="sticking-group-container"><h3>${o.title}</h3>`;const n=Object.keys(o.patterns);n.forEach((s,a)=>{let l="";for(let e=0;e<t;e++)l+=o.patterns[s][e%o.patterns[s].length];let r=[];for(let t=0;t<l.length;t+=notesPerRow)r.push(l.substring(t,t+notesPerRow));r.forEach((t,o)=>{let n='<div class="line">';for(let e=0;e<t.length;e++){const s=o*notesPerRow+e,a=t[e],l=userAccents[s]===1?"note accent":"note";n+=`<span class="${l}">${a}</span>`,(e+1)%notesPerMeasure==0&&e<t.length-1?n+='<span class="bar-line">|</span>':(e+1)%4==0&&(n+='<span class="sub-spacer"></span>')}n+="</div>",e+=n}),a<n.length-1&&(e+='<div class="variation-spacer"></div>')}),e+="</div>"}outputDiv.innerHTML=e}function createInputStaff(){if(!staffContainer)return;staffContainer.innerHTML="";const t=notesPerMeasure*currentTotalMeasures;userAccents=new Array(t).fill(0);let e=0;for(let o=0;o<currentTotalMeasures;o++){const n=document.createElement("div");n.classList.add("measure");for(let s=0;s<notesPerMeasure;s++){const a=document.createElement("div");a.classList.add("note-container"),a.dataset.index=e;const l=document.createElement("div");l.classList.add("accent-mark"),l.innerHTML=">";const r=document.createElement("div");r.classList.add("note-head");const c=document.createElement("div");c.classList.add("note-stem"),a.appendChild(l),a.appendChild(r),a.appendChild(c),a.addEventListener("click",()=>{a.classList.toggle("accented");const t=parseInt(a.dataset.index);userAccents[t]=userAccents[t]===0?1:0,renderExercise(),presetSelect.value="Custom (Clear)"}),n.appendChild(a),e++}const s=document.createElement("div");s.classList.add("beam","first-group");const a=document.createElement("div");a.classList.add("beam","second-group"),n.appendChild(s),n.appendChild(a),staffContainer.appendChild(n)}}function syncStaffUI(){const t=staffContainer.querySelectorAll(".note-container");t.forEach((t,e)=>{userAccents[e]===1?t.classList.add("accented"):t.classList.remove("accented")})}function applyPreset(t){const e=melodyPresets[t],o=currentTotalMeasures*notesPerMeasure;for(let t=0;t<o;t++)userAccents[t]=e[t]||0;syncStaffUI(),renderExercise()}function populatePresetSelector(){if(!presetSelect)return;presetSelect.innerHTML="";for(const t in melodyPresets){const e=document.createElement("option");e.value=t,e.textContent=t,presetSelect.appendChild(e)}}function initializeApp(){document.getElementById("input-staff")&&(createInputStaff(),renderExercise())}buttons.forEach(t=>{t.addEventListener("click",e=>{buttons.forEach(t=>t.classList.remove("active")),e.target.classList.add("active"),currentTotalMeasures=parseInt(e.target.id.split("-")[1]),initializeApp()})}),presetSelect.addEventListener("change",t=>{applyPreset(t.target.value)}),populatePresetSelector(),initializeApp();var swiper=new Swiper(".mySwiper",{slidesPerView:"auto",centeredSlides:!0,spaceBetween:20,loop:!0,navigation:{nextEl:".swiper-button-next",prevEl:".swiper-button-prev"},pagination:{el:".swiper-pagination",clickable:!0}});let lastScrollTop=0;const header=document.querySelector(".main-header");window.addEventListener("scroll",function(){if(!header)return;let t=window.pageYOffset||document.documentElement.scrollTop;t>lastScrollTop&&t>header.offsetHeight?header.classList.add("hidden"):header.classList.remove("hidden"),lastScrollTop=t<=0?0:t},!1),window.addEventListener("load",()=>{setTimeout(()=>window.scrollTo(0,0),1)});var musicSwiper = new Swiper(".music-swiper", {
+    // 1. Tüm çevirileri tek bir yerde toplayalım
+    const translations = {
+        en: {
+            page_title: "Batuhan Toyhan | A&R+ Drum Exercise Generator",
+            nav_about: "about",
+            nav_videos: "videos",
+            nav_contact: "contact",
+            app_create_melody: "1. Create Melody",
+            app_4_bar: "4 Bar",
+            app_8_bar: "8 Bar",
+            app_12_bar: "12 Bar",
+            app_stickings: "2. Stickings",
+            about_title: "About Me",
+            about_p1: "I worked on drums with Emre Kartari at Yaşar University's Jazz Performance department. Although my main focus is jazz, I have performed on stage in a wide spectrum ranging from punk-rock to electronic sufism over the past 15 years.",
+            about_p2: "This diverse musical foundation sparked my curiosity for sound itself, directing me to the world of production. In my solo project, Mindown, I started to release my own tracks, delving into sampling and sound design. My work in this area led to professional opportunities like preparing the intro music and sound recordings for the popular YouTube program Katarsis and allowed me to take part in various documentary projects.",
+            about_p3: "Lately, I have been working on developing interactive systems like A&R+ and ToT+ based on classic drum methods, and designing audio-reactive visual performances.",
+            contact_title: "Contact & Support",
+            contact_desc: "You can reach me out on my social media channels or support my work.",
+            footer_copyright: "© 2025 Batuhan Toyhan. All Rights Reserved.",
+            // Dinamik olarak oluşturulan içerikler için çeviriler
+            preset_custom: "Custom (Clear)",
+            preset_2_note: "2-Note Grouping",
+            preset_3_note: "3-Note Grouping",
+            preset_4_note: "4-Note Grouping",
+            preset_5_note: "5-Note Grouping",
+            preset_6_note: "6-Note Grouping",
+            preset_7_note: "7-Note Grouping",
+            sticking_single: "Single",
+            sticking_double: "Double",
+            sticking_inverted_double: "Inverted Double",
+            sticking_paradiddle: "Paradiddle",
+            sticking_paradiddle_inv1: "Paradiddle Inversion no:1",
+            sticking_paradiddle_inv2: "Paradiddle Inversion no:2",
+            sticking_four_stroke: "Four Stroke Rolls",
+            sticking_single_hand: "Single Hand Patterns"
+        },
+        tr: {
+            page_title: "Batuhan Toyhan | A&R+ Davul Egzersiz Üretici",
+            nav_about: "hakkımda",
+            nav_videos: "videolar",
+            nav_contact: "iletişim",
+            app_create_melody: "1. Melodi Oluştur",
+            app_4_bar: "4 Ölçü",
+            app_8_bar: "8 Ölçü",
+            app_12_bar: "12 Ölçü",
+            app_stickings: "2. Vuruş Teknikleri (Sticking)",
+            about_title: "Hakkımda",
+            about_p1: "RYaşar Üniversitesi Caz Performans bölümünde Emre Kartari ile davul çalıştım. Ana odağım caz olsa da geçtiğimiz 15 yılda punk-rock'tan elektronik tasavvufa uzanan geniş bir yelpazede sahne aldım.",
+            about_p2: "Bu çeşitli müzikal temel, sesin kendisine duyduğum merakı ateşleyerek beni prodüksiyon dünyasına yöneltti. Solo projem Mindown'da, sampling ve ses tasarımı üzerine derinleşerek kendi parçalarımı yayınlamaya başladım. Bu alandaki çalışmalarım, popüler YouTube programı Katarsis'in jenerik müziği ve ses kayıtlarını hazırlamak gibi profesyonel fırsatlara ve çeşitli belgesel projelerinde yer almama olanak tanıdı.",
+            about_p3: "Son zamanlarda, klasik davul metotlarını temel alarak A&R+ ve ToT+ gibi interaktif sistemler geliştirmek ve ses ile görüntünün etkileşimine dayalı performanslar tasarlamak üzerine çalışıyorum.",
+            contact_title: "İletişim",
+            contact_desc: "Bana sosyal medya kanallarımdan ulaşabilir veya çalışmalarımı destekleyebilirsiniz.",
+            footer_copyright: "© 2025 Batuhan Toyhan. Tüm Hakları Saklıdır.",
+            // Dinamik olarak oluşturulan içerikler için çeviriler
+            preset_custom: "Özel (Temizle)",
+            preset_2_note: "2'li Gruplama",
+            preset_3_note: "3'lü Gruplama",
+            preset_4_note: "4'lü Gruplama",
+            preset_5_note: "5'li Gruplama",
+            preset_6_note: "6'lı Gruplama",
+            preset_7_note: "7'li Gruplama",
+            sticking_single: "Single (Tekli Vuruş)",
+            sticking_double: "Double (Çiftli Vuruş)",
+            sticking_inverted_double: "Inverted Double",
+            sticking_paradiddle: "Paradiddle",
+            sticking_paradiddle_inv1: "Paradiddle Çevrimi no:1",
+            sticking_paradiddle_inv2: "Paradiddle Çevrimi no:2",
+            sticking_four_stroke: "Dörtlü Rulo",
+            sticking_single_hand: "Tek El Patternleri"
+        }
+    };
+
+    // 2. Dili değiştirecek olan ana fonksiyon
+    function changeLanguage(lang) {
+        // HTML etiketinin lang özelliğini güncelle (SEO ve erişilebilirlik için önemli)
+        document.documentElement.lang = lang;
+        
+        // `data-langkey` olan tüm elemanları bul ve metinlerini güncelle
+        document.querySelectorAll('[data-langkey]').forEach(element => {
+            const key = element.getAttribute('data-langkey');
+            if (translations[lang][key]) {
+                element.innerText = translations[lang][key];
+            }
+        });
+        
+        // Sayfa başlığını güncelle
+        document.title = translations[lang].page_title;
+        
+        // Dil değiştirici butonlarının aktif durumunu güncelle
+        document.querySelectorAll('.lang-switcher a').forEach(a => {
+            a.classList.remove('active');
+            if (a.getAttribute('data-lang') === lang) {
+                a.classList.add('active');
+            }
+        });
+
+        // Egzersiz uygulamasını yeni dille yeniden başlat/güncelle
+        // Bu fonksiyonlar mevcut script'inizde bulunuyor, onları çağırıyoruz.
+        if (typeof populatePresetSelector === 'function' && typeof renderExercise === 'function') {
+            populatePresetSelector();
+            renderExercise();
+        }
+
+        // Seçilen dili kullanıcının tarayıcısında sakla
+        localStorage.setItem('language', lang);
+    }
+    
+    // 3. Butonlara tıklama olaylarını ekle
+    document.querySelectorAll('.lang-switcher a').forEach(a => {
+        a.addEventListener('click', (e) => {
+            e.preventDefault(); // Sayfanın en üste gitmesini engelle
+            const lang = a.getAttribute('data-lang');
+            changeLanguage(lang);
+        });
+    });
+
+    // 4. Sayfa yüklendiğinde kullanıcının son seçtiği dili uygula
+    document.addEventListener('DOMContentLoaded', () => {
+        const savedLang = localStorage.getItem('language') || 'en'; // Kayıtlı dil yoksa İngilizce'yi varsay
+        changeLanguage(savedLang);
+    });
+    </script>
+    
+    <script>
+    const maxNotes=96;
+    const generateGroupingPattern=t=>{const e=[];for(let o=0;o<maxNotes;o++)e.push(o%t==0?1:0);return e};
+    
+    // Orijinal script'inizdeki metinleri, çeviri anahtarlarıyla değiştirdik
+    let melodyPresets = {};
+    let stickingGroups = [];
+
+    function updateDynamicContentLanguage() {
+        const currentLang = document.documentElement.lang || 'en';
+        
+        melodyPresets = {
+            [translations[currentLang].preset_custom]: [],
+            [translations[currentLang].preset_2_note]: generateGroupingPattern(2),
+            [translations[currentLang].preset_3_note]: generateGroupingPattern(3),
+            [translations[currentLang].preset_4_note]: generateGroupingPattern(4),
+            [translations[currentLang].preset_5_note]: generateGroupingPattern(5),
+            [translations[currentLang].preset_6_note]: generateGroupingPattern(6),
+            [translations[currentLang].preset_7_note]: generateGroupingPattern(7)
+        };
+        
+        stickingGroups = [
+            { titleKey: "sticking_single", patterns: { R: "rlrl", L: "lrlr" } },
+            { titleKey: "sticking_double", patterns: { R: "rrll", L: "llrr" } },
+            { titleKey: "sticking_inverted_double", patterns: { R: "rllr", L: "lrrl" } },
+            { titleKey: "sticking_paradiddle", patterns: { R: "rlrrlrll", L: "lrllrllr" } },
+            { titleKey: "sticking_paradiddle_inv1", patterns: { R: "rllrlrrl", L: "lrrlrllr" } },
+            { titleKey: "sticking_paradiddle_inv2", patterns: { R: "rrlrllrl", L: "llrllr" } },
+            { titleKey: "sticking_four_stroke", patterns: { R: "rrrrllll", L: "llllrrrr" } },
+            { titleKey: "sticking_single_hand", patterns: { R: "rrrr", L: "llll" } }
+        ];
+    }
+    
+    const notesPerMeasure=8,notesPerRow=4*notesPerMeasure;let currentTotalMeasures=4,userAccents=[];const staffContainer=document.getElementById("input-staff"),outputDiv=document.getElementById("output"),buttons=[document.getElementById("btn-4"),document.getElementById("btn-8"),document.getElementById("btn-12")],presetSelect=document.getElementById("preset-select");
+    
+    function renderExercise(){
+        updateDynamicContentLanguage(); // Dil verilerini güncelle
+        const currentLang = document.documentElement.lang || 'en';
+        if(!outputDiv)return;const t=notesPerMeasure*currentTotalMeasures;let e="";for(const o of stickingGroups){
+            // Çevrilmiş başlığı al
+            const translatedTitle = translations[currentLang][o.titleKey];
+            e+=`<div class="sticking-group-container"><h3>${translatedTitle}</h3>`;const n=Object.keys(o.patterns);n.forEach((s,a)=>{let l="";for(let e=0;e<t;e++)l+=o.patterns[s][e%o.patterns[s].length];let r=[];for(let t=0;t<l.length;t+=notesPerRow)r.push(l.substring(t,t+notesPerRow));r.forEach((t,o)=>{let n='<div class="line">';for(let e=0;e<t.length;e++){const s=o*notesPerRow+e,a=t[e],l=userAccents[s]===1?"note accent":"note";n+=`<span class="${l}">${a}</span>`,(e+1)%notesPerMeasure==0&&e<t.length-1?n+='<span class="bar-line">|</span>':(e+1)%4==0&&(n+='<span class="sub-spacer"></span>')}n+="</div>",e+=n}),a<n.length-1&&(e+='<div class="variation-spacer"></div>')}),e+="</div>"}outputDiv.innerHTML=e}
+            
+    function createInputStaff(){if(!staffContainer)return;staffContainer.innerHTML="";const t=notesPerMeasure*currentTotalMeasures;userAccents=new Array(t).fill(0);let e=0;for(let o=0;o<currentTotalMeasures;o++){const n=document.createElement("div");n.classList.add("measure");for(let s=0;s<notesPerMeasure;s++){const a=document.createElement("div");a.classList.add("note-container"),a.dataset.index=e;const l=document.createElement("div");l.classList.add("accent-mark"),l.innerHTML=">";const r=document.createElement("div");r.classList.add("note-head");const c=document.createElement("div");c.classList.add("note-stem"),a.appendChild(l),a.appendChild(r),a.appendChild(c),a.addEventListener("click",()=>{a.classList.toggle("accented");const t=parseInt(a.dataset.index);userAccents[t]=userAccents[t]===0?1:0,renderExercise(),presetSelect.value=Object.keys(melodyPresets)[0]}),n.appendChild(a),e++}const s=document.createElement("div");s.classList.add("beam","first-group");const a=document.createElement("div");a.classList.add("beam","second-group"),n.appendChild(s),n.appendChild(a),staffContainer.appendChild(n)}}
+    
+    function syncStaffUI(){const t=staffContainer.querySelectorAll(".note-container");t.forEach((t,e)=>{userAccents[e]===1?t.classList.add("accented"):t.classList.remove("accented")})}
+    
+    function applyPreset(t){const e=melodyPresets[t],o=currentTotalMeasures*notesPerMeasure;for(let t=0;t<o;t++)userAccents[t]=e[t]||0;syncStaffUI(),renderExercise()}
+    
+    function populatePresetSelector(){
+        updateDynamicContentLanguage(); // Dil verilerini güncelle
+        if(!presetSelect)return;const currentValue = presetSelect.value; presetSelect.innerHTML="";for(const t in melodyPresets){const e=document.createElement("option");e.value=t,e.textContent=t,presetSelect.appendChild(e)} presetSelect.value = currentValue; }
+    
+    function initializeApp(){document.getElementById("input-staff")&&(createInputStaff(),renderExercise())}buttons.forEach(t=>{t.addEventListener("click",e=>{buttons.forEach(t=>t.classList.remove("active")),e.target.classList.add("active"),currentTotalMeasures=parseInt(e.target.id.split("-")[1]),initializeApp()})}),presetSelect.addEventListener("change",t=>{applyPreset(t.target.value)}),populatePresetSelector(),initializeApp();var swiper=new Swiper(".mySwiper",{slidesPerView:"auto",centeredSlides:!0,spaceBetween:20,loop:!0,navigation:{nextEl:".swiper-button-next",prevEl:".swiper-button-prev"},pagination:{el:".swiper-pagination",clickable:!0}});let lastScrollTop=0;const header=document.querySelector(".main-header");window.addEventListener("scroll",function(){if(!header)return;let t=window.pageYOffset||document.documentElement.scrollTop;t>lastScrollTop&&t>header.offsetHeight?header.classList.add("hidden"):header.classList.remove("hidden"),lastScrollTop=t<=0?0:t},!1),window.addEventListener("load",()=>{setTimeout(()=>window.scrollTo(0,0),1)});var musicSwiper = new Swiper(".music-swiper", {
         slidesPerView: "auto",
         centeredSlides: true,
         spaceBetween: 30, // Aralarındaki boşluk
