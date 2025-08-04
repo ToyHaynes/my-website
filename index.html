@@ -5,14 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Batuhan Toyhan | A&R+ Drum Exercise Generator</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
+        /* YENİ TEMA: MODERN MAVİ */
         :root {
-            --bg-color: #423e37;
-            --text-color: #edebd7;
-            --primary-color: #e3b23c;
-            --neutral-light: #a39594;
-            --neutral-dark: #6e675f;
-            --white: #ffffff;
+            /* Yeni Renk Paleti */
+            --bg-color: #0d1b2a;         /* Gece Mavisi (Arka Plan) */
+            --container-bg: #1b263b;   /* Koyu Mavi (Kutular) */
+            --text-color: #e0e1dd;       /* Kırık Beyaz (Metinler) */
+            --primary-color: #38bdf8;    /* Elektrik Mavisi (Vurgu Rengi) */
+            --neutral-color: #778da9;    /* Gri-Mavi (Nötr/Kenarlık) */
+            
+            /* Font Değişkeni */
+            --font-main: 'Outfit', sans-serif;
+
+            /* Boyut Değişkenleri */
             --char-width: 22px; 
             --gap-width: 22px;
             --measure-gap: 44px;
@@ -20,18 +29,20 @@
         * { box-sizing: border-box; }
         html { scroll-behavior: smooth; }
         body {
-            font-family: 'Courier New', Courier, monospace;
+            font-family: var(--font-main);
+            font-weight: 400;
             background-color: var(--bg-color);
             color: var(--text-color);
             padding: 0; margin: 0;
         }
         .main-header {
-            background-color: rgba(0,0,0,0.3);
+            background-color: rgba(13, 27, 42, 0.7);
             padding: 1rem 2rem;
             position: sticky;
             top: 0;
             z-index: 1000;
-            backdrop-filter: blur(5px);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--container-bg);
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -40,41 +51,39 @@
         .main-header.hidden {
             transform: translateY(-100%);
         }
-
-        /* DEĞİŞİKLİK 4: Header hizalaması */
         .header-brand {
             display: flex;
             flex-direction: column;
-            align-items: center; /* İki satırı birbirine göre ortalar */
+            align-items: center;
         }
-        .header-brand .brand-name {
-            margin: 0;
-            font-family: sans-serif;
-            font-size: 1.5rem;
-            color: var(--text-color);
-        }
-        .header-brand .brand-titles {
-            margin: 0;
-            font-family: sans-serif;
-            font-size: 0.8rem;
-            color: var(--neutral-light);
-            letter-spacing: 1px;
-        }
+        .header-brand .brand-name { margin: 0; font-family: var(--font-main); font-size: 1.5rem; color: var(--text-color); font-weight: 700; }
+        .header-brand .brand-titles { margin: 0; font-family: var(--font-main); font-size: 0.8rem; color: var(--neutral-color); letter-spacing: 1px; }
         .main-nav ul { display: flex; gap: 2rem; margin: 0; padding: 0; list-style: none; }
-        .main-nav a { color: var(--text-color); text-decoration: none; font-family: sans-serif; font-weight: bold; transition: color 0.2s; }
+        .main-nav a { color: var(--text-color); text-decoration: none; font-family: var(--font-main); font-weight: 500; transition: color 0.2s; }
         .main-nav a:hover { color: var(--primary-color); }
         
         section { padding: 4rem 2rem; }
         .section-content { max-width: 950px; margin: 0 auto; }
-        h2 { color: var(--text-color); font-family: sans-serif; text-align: center; font-size: 2.5rem; margin-top:0; margin-bottom: 2rem; }
-        h3 { color: var(--primary-color); font-family: sans-serif; border-bottom: 1px solid var(--neutral-dark); padding-bottom: 8px; }
+        h2 { color: var(--text-color); font-family: var(--font-main); text-align: center; font-size: 2.5rem; margin-top:0; margin-bottom: 2rem; font-weight: 700; }
+        h3 { 
+            color: var(--text-color);
+            font-family: var(--font-main); 
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 8px; 
+            font-weight: 500;
+        }
         .container { width: fit-content; margin: 0 auto; max-width: 100%; }
         .controls { margin-top: 15px; margin-bottom: 20px; display: flex; align-items: center; flex-wrap: wrap; gap: 10px; }
-        .control-btn { background-color: var(--neutral-dark); border: 1px solid var(--neutral-light); color: var(--text-color); padding: 8px 16px; margin-right: 10px; cursor: pointer; border-radius: 4px; transition: all 0.2s ease-in-out; }
+        .control-btn { 
+            background-color: var(--container-bg); border: 1px solid var(--neutral-color); 
+            color: var(--text-color); padding: 8px 16px; margin-right: 10px; cursor: pointer; 
+            border-radius: 4px; transition: all 0.2s ease-in-out; font-family: var(--font-main);
+        }
         .control-btn:hover { border-color: var(--primary-color); color: var(--primary-color); }
         .control-btn.active { background-color: var(--primary-color); border-color: var(--primary-color); color: var(--bg-color); }
-        .control-select { background-color: var(--neutral-dark); border: 1px solid var(--neutral-light); color: var(--text-color); padding: 7px; border-radius: 4px; margin-left: auto; }
-        #input-staff { display: grid; grid-template-columns: repeat(4, auto); gap: var(--measure-gap); border: 2px solid var(--neutral-dark); background-color: rgba(0, 0, 0, 0.2); border-radius: 5px; margin-bottom: 30px; padding: 20px; }
+        .control-select { background-color: var(--container-bg); border: 1px solid var(--neutral-color); color: var(--text-color); padding: 7px; border-radius: 4px; margin-left: auto; font-family: var(--font-main);}
+        
+        #input-staff { display: grid; grid-template-columns: repeat(4, auto); gap: var(--measure-gap); border: 2px solid var(--container-bg); background-color: var(--container-bg); border-radius: 8px; margin-bottom: 30px; padding: 20px; }
         .measure { display: flex; position: relative; width: calc(8 * var(--char-width) + var(--gap-width)); }
         .measure:not(:last-child)::after { content: ''; position: absolute; height: 70%; width: 2px; background-color: var(--primary-color); top: 15%; right: calc( (var(--measure-gap) / -2) - 1px ); }
         #input-staff .measure:nth-of-type(4n)::after { display: none; }
@@ -89,72 +98,47 @@
         .note-container.accented .accent-mark { opacity: 1; }
         .note-container.accented .note-head { background-color: var(--primary-color); transform: rotate(-15deg) scale(1.1); }
         .note-container.accented .note-stem { background-color: var(--primary-color); }
-        #output { background-color: rgba(0, 0, 0, 0.2); padding: 20px; border-radius: 5px; width: 100%; }
+        
+        #output { background-color: var(--container-bg); padding: 20px; border-radius: 8px; width: 100%; }
         .sticking-group-container { margin-bottom: 15px; }
-        .sticking-group-container .line { display: flex; flex-wrap: nowrap; line-height: 2.2em; font-size: 16px; }
+        .sticking-group-container .line { font-family: 'Courier New', Courier, monospace; display: flex; flex-wrap: nowrap; line-height: 2.2em; font-size: 16px; }
         .variation-spacer { height: 1.5em; }
         .note, .sub-spacer, .bar-line { display: inline-block; text-align: center; vertical-align: middle; }
         .note { width: var(--char-width); }
         .sub-spacer { width: var(--gap-width); }
         .bar-line { width: var(--measure-gap); color: var(--primary-color); font-weight: bold; }
         .note.accent { background-color: transparent; color: var(--primary-color); font-weight: bold; text-transform: uppercase; }
+        
+        #about { background-color: var(--container-bg); }
+        .about-container { display: flex; align-items: center; gap: 3rem; }
+        .about-photo { flex-basis: 35%; flex-shrink: 0; }
+        .about-photo img { width: 100%; height: auto; display: block; border-radius: 8px; }
+        .about-text { flex-basis: 65%; }
+        .about-text h2 { text-align: left; border-bottom: 1px solid var(--neutral-color); padding-bottom: 8px; margin-bottom: 1.5rem; margin-top: 0; color: var(--text-color);}
+        .about-text p { font-family: var(--font-main); font-size: 1.1rem; line-height: 1.7; margin-top: 0; margin-bottom: 1rem; font-weight: 400;}
+
         .swiper { width: 100%; height: 100%; padding: 10px 0 40px 0; }
-        .swiper-slide { text-align: center; font-size: 18px; background: transparent; display: flex; justify-content: center; align-items: center; width: 70%; transition: transform 0.3s; }
+        .swiper-slide { text-align: center; font-size: 18px; background: transparent; display: flex; justify-content: center; align-items: center; width: 70%; transition: transform 0.3s, opacity 0.3s; }
         .swiper-slide:not(.swiper-slide-active) { transform: scale(0.85); opacity: 0.6; }
         .video-wrapper { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; width: 100%; border-radius: 8px; }
         .video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
         .swiper-button-next, .swiper-button-prev { color: var(--primary-color); }
         .swiper-pagination-bullet-active { background: var(--primary-color); }
-        .main-footer { text-align: center; padding: 2rem; background-color: rgba(0,0,0,0.2); }
+        .main-footer { text-align: center; padding: 2rem; background-color: var(--container-bg); }
         .social-links { list-style: none; padding: 0; margin: 0 0 1rem 0; display: flex; justify-content: center; gap: 1.5rem; }
-        .social-links a { color: var(--neutral-light); text-decoration: none; font-size: 1.5rem; transition: color 0.2s; }
+        .social-links a { color: var(--neutral-color); text-decoration: none; font-size: 1rem; transition: color 0.2s; }
         .social-links a:hover { color: var(--primary-color); }
-        /* --- Hakkımda Bölümü Stilleri --- */
-        .about-container {
-            display: flex;
-            align-items: center; /* Fotoğraf ve yazıyı dikeyde ortalar */
-            gap: 3rem; /* Aralarındaki boşluk */
+        .main-footer p {
+            color: var(--neutral-light); /* Yazıyı daha soluk olan nötr renge çeviriyoruz */
         }
-        .about-photo {
-            flex-basis: 35%; /* Fotoğrafın genişliği %35 olsun */
-            flex-shrink: 0;
-        }
-        .about-photo img {
-            width: 100%;
-            height: auto;
-            display: block;
-            border-radius: 8px; /* Köşeleri yumuşatır */
-        }
-        .about-text {
-            flex-basis: 65%; /* Yazının genişliği %65 olsun */
-        }
-        .about-text h2 {
-            text-align: left; /* Başlığı sola hizala */
-            border-bottom: 1px solid var(--neutral-dark);
-            padding-bottom: 8px;
-            margin-bottom: 1.5rem;
-            margin-top: 0;
-        }
-        .about-text p {
-            font-family: sans-serif; /* Daha okunaklı bir font */
-            font-size: 1.1rem;
-            line-height: 1.7;
-            margin-top: 0;
-            margin-bottom: 1rem;
+        .footer-description, .footer-copyright {
+            font-size: 0.8rem; /* Puntoyu küçültür */
+            color: #778da9; /* Rengi daha soluk yapar */
+            font-family: var(--font-main);
         }
         
-        @media (max-width: 980px) { 
-            #input-staff { grid-template-columns: repeat(2, auto); }
-            #input-staff .measure:nth-of-type(4n)::after { display: block; }
-            #input-staff .measure:nth-of-type(2n)::after { display: none; }
-        }
-        @media (max-width: 768px) { 
-            .main-header { flex-direction: column; text-align: center; gap: 1rem; } 
-            .header-brand { align-items: center; }
-
-            /* BU SATIRI EKLE */
-            .about-container { flex-direction: column; text-align: center; } 
-        }
+        @media (max-width: 980px) { #input-staff { grid-template-columns: repeat(2, auto); } #input-staff .measure:nth-of-type(4n)::after { display: block; } #input-staff .measure:nth-of-type(2n)::after { display: none; } }
+        @media (max-width: 768px) { .main-header { flex-direction: column; text-align: center; gap: 1rem; } .header-brand { align-items: center; } .about-container { flex-direction: column; text-align: center; } }
         @media (max-width: 520px) {
             h2 { font-size: 2rem; }
             section { padding: 3rem 1rem; }
@@ -177,9 +161,9 @@
         <nav class="main-nav">
             <ul>
                 <li><a href="#app">A&R+</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#videos">Videos</a></li>
-                <li><a href="#contact">Contact</a></li>
+                <li><a href="#about">about</a></li>
+                <li><a href="#videos">videos</a></li>
+                <li><a href="#contact">contact</a></li>
             </ul>
         </nav>
     </header>
@@ -203,7 +187,7 @@
                 </div>
             </div>
         </section>
-       <section id="about" style="background-color: rgba(0,0,0,0.1);">
+       <section id="about" style="background-color: var(--container-bg);">
             <div class="section-content">
                 <div class="about-container">
                     <div class="about-photo">
@@ -227,13 +211,30 @@
                 </div>
             </div>
         </section>
-        <section id="videos" style="background-color: rgba(0,0,0,0.1);">
-            <div class="section-content">
-                <h2>My Videos</h2>
+        <section id="videos">
+            <div class="section-content">               
                 <div class="swiper mySwiper">
                     <div class="swiper-wrapper">
-                        <div class="swiper-slide"> <div class="video-wrapper"> <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="YouTube video player" frameborder="0" allowfullscreen></iframe> </div> </div>
-                        <div class="swiper-slide"> <div class="video-wrapper"> <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="YouTube video player" frameborder="0" allowfullscreen></iframe> </div> </div>
+                        <div class="swiper-slide">
+                            <div class="video-wrapper">
+                                <iframe width="560" height="315" src="https://youtube.com/embed/HLqY9q7asek?si=II7jGI-Tuwk1C-ts" title="YouTube video player" frameborder="0" allowfullscreen></iframe>
+                            </div>
+                        </div>
+                         <div class="swiper-slide">
+                            <div class="video-wrapper">
+                                <iframe width="560" height="315" src="https://youtube.com/embed/GNSdXO0lm7M?si=dKuJx0kdJmMFqMF6" title="YouTube video player" frameborder="0" allowfullscreen></iframe>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="video-wrapper">
+                                <iframe width="560" height="315" src="https://youtube.com/embed/qsdOg70xzGA?si=kpUNFt6tf_S3FTaS" title="YouTube video player" frameborder="0" allowfullscreen></iframe>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="video-wrapper">
+                                <iframe width="560" height="315" src="https://www.youtube.com/embed/4EqSM0CgQWw?si=HvdDtpRUDO4EJcdo&start=191" title="YouTube video player" frameborder="0" allowfullscreen></iframe>
+                            </div>
+                        </div>
                     </div>
                     <div class="swiper-button-next"></div> <div class="swiper-button-prev"></div> <div class="swiper-pagination"></div>
                 </div>
@@ -242,145 +243,16 @@
     </main>
     <footer id="contact" class="main-footer">
         <h3>Contact & Support</h3>
-        <p>You can reach me out on my social media channels or support my work.</p>
+        <p class="footer-description">You can reach me out on my social media channels or support my work.</p>
         <ul class="social-links">
-            <li><a href="#" target="_blank" title="YouTube">YT</a></li> <li><a href="#" target="_blank" title="Instagram">IG</a></li> <li><a href="#" target="_blank" title="GitHub">GH</a></li> <li><a href="#" target="_blank" title="Spotify">SP</a></li> <li><a href="#" target="_blank" title="Ko-fi">KF</a></li> <li><a href="#" target="_blank" title="Patreon">PT</a></li>
+            <li><a href="https://www.youtube.com/channel/UCvekuqaqyAe53lzC2b6NR1w" target="_blank" title="YouTube">YOUTUBE</a></li> <li><a href="instagram.com/batuhantoyhan" target="_blank" title="Instagram">INSTAGRAM</a></li> <li><a href="https://open.spotify.com/artist/0orq0FTDo9vCcUYQNG3exs?si=vME_AbL9QluZ2-kxsoOlLA" target="_blank" title="Spotify">SPOTIFY</a></li> <li><a href="https://mindownbeats.bandcamp.com" target="_blank" title="Bandcamp">BANDCAMP</a></li><li><a href="#" target="_blank" title="Ko-fi">KO-FI</a></li> <li><a href="#" target="_blank" title="Patreon">PATREON</a></li>
         </ul>
-        <p>© 2025 Batuhan Toyhan. All Rights Reserved.</p>
+        <p class="footer-copyright">© 2025 Batuhan Toyhan. All Rights Reserved.</p>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script>
-    const maxNotes = 96;
-    const generateGroupingPattern = (groupSize) => { const pattern = []; for (let i = 0; i < maxNotes; i++) { pattern.push(i % groupSize === 0 ? 1 : 0); } return pattern; };
-    const melodyPresets = { "Custom (Clear)": [], "2-Note Grouping": generateGroupingPattern(2), "3-Note Grouping": generateGroupingPattern(3), "4-Note Grouping": generateGroupingPattern(4), "5-Note Grouping": generateGroupingPattern(5), "6-Note Grouping": generateGroupingPattern(6), "7-Note Grouping": generateGroupingPattern(7), };
-    const stickingGroups = [ { title: "Single", patterns: { "R": "rlrl", "L": "lrlr" } }, { title: "Double", patterns: { "R": "rrll", "L": "llrr" } }, { title: "Inverted Double", patterns: { "R": "rllr", "L": "lrrl" } }, { title: "Paradiddle", patterns: { "R": "rlrrlrll", "L": "lrllrllr" } }, { title: "Paradiddle Inversion no:1", patterns: { "R": "rllrlrrl", "L": "lrrlrllr" } }, { title: "Paradiddle Inversion no:2", patterns: { "R": "rrlrllrl", "L": "llrllr" } }, { title: "Four Stroke Rolls", patterns: { "R": "rrrrllll", "L": "llllrrrr" } }, { title: "Single Hand Patterns", patterns: { "R": "rrrr", "L": "llll" } } ];
-    const notesPerMeasure = 8;
-    const notesPerRow = notesPerMeasure * 4;
-    let currentTotalMeasures = 4;
-    let userAccents = [];
-    const staffContainer = document.getElementById('input-staff');
-    const outputDiv = document.getElementById('output');
-    const buttons = [ document.getElementById('btn-4'), document.getElementById('btn-8'), document.getElementById('btn-12') ];
-    const presetSelect = document.getElementById('preset-select');
-    
-    function renderExercise() {
-        if (!outputDiv) return;
-        const totalNotes = notesPerMeasure * currentTotalMeasures;
-        let finalHtmlOutput = ""; 
-        for (const group of stickingGroups) {
-            finalHtmlOutput += `<div class="sticking-group-container">`;
-            finalHtmlOutput += `<h3>${group.title}</h3>`;
-            const patternKeys = Object.keys(group.patterns);
-            patternKeys.forEach((key, index) => {
-                const stickingPattern = group.patterns[key];
-                let fullStickingSequence = "";
-                for (let i = 0; i < totalNotes; i++) { fullStickingSequence += stickingPattern[i % stickingPattern.length]; }
-                
-                let lines = [];
-                for (let i = 0; i < fullStickingSequence.length; i += notesPerRow) {
-                    lines.push(fullStickingSequence.substring(i, i + notesPerRow));
-                }
-                
-                lines.forEach((line, lineIndex) => {
-                    let currentLineHtml = '<div class="line">';
-                    for (let i = 0; i < line.length; i++) {
-                        const globalIndex = lineIndex * notesPerRow + i;
-                        const note = line[i];
-                        const noteClass = userAccents[globalIndex] === 1 ? "note accent" : "note";
-                        currentLineHtml += `<span class="${noteClass}">${note}</span>`;
-                        if ((i + 1) % notesPerMeasure === 0 && i < line.length - 1) { currentLineHtml += '<span class="bar-line">|</span>'; } 
-                        else if ((i + 1) % 4 === 0) { currentLineHtml += '<span class="sub-spacer"></span>'; }
-                    }
-                    currentLineHtml += '</div>';
-                    finalHtmlOutput += currentLineHtml;
-                });
-                
-                if (index < patternKeys.length - 1) {
-                    finalHtmlOutput += '<div class="variation-spacer"></div>';
-                }
-            });
-            finalHtmlOutput += `</div>`;
-        }
-        outputDiv.innerHTML = finalHtmlOutput;
-    }
-
-    function createInputStaff() {
-        if (!staffContainer) return;
-        staffContainer.innerHTML = ''; 
-        const totalNotes = notesPerMeasure * currentTotalMeasures;
-        userAccents = new Array(totalNotes).fill(0);
-        let noteCounter = 0;
-        for (let m = 0; m < currentTotalMeasures; m++) {
-            const measureDiv = document.createElement('div');
-            measureDiv.classList.add('measure');
-            for (let n = 0; n < notesPerMeasure; n++) {
-                const noteContainer = document.createElement('div'); noteContainer.classList.add('note-container'); noteContainer.dataset.index = noteCounter;
-                const accentMark = document.createElement('div'); accentMark.classList.add('accent-mark'); accentMark.innerHTML = '>';
-                const noteHead = document.createElement('div'); noteHead.classList.add('note-head');
-                const noteStem = document.createElement('div'); noteStem.classList.add('note-stem');
-                noteContainer.appendChild(accentMark); noteContainer.appendChild(noteHead); noteContainer.appendChild(noteStem);
-                noteContainer.addEventListener('click', () => {
-                    noteContainer.classList.toggle('accented');
-                    const noteIndex = parseInt(noteContainer.dataset.index);
-                    userAccents[noteIndex] = userAccents[noteIndex] === 0 ? 1 : 0;
-                    renderExercise(); 
-                    presetSelect.value = "Custom (Clear)";
-                });
-                measureDiv.appendChild(noteContainer);
-                noteCounter++;
-            }
-            const beam1 = document.createElement('div'); beam1.classList.add('beam', 'first-group');
-            const beam2 = document.createElement('div'); beam2.classList.add('beam', 'second-group');
-            measureDiv.appendChild(beam1); measureDiv.appendChild(beam2);
-            staffContainer.appendChild(measureDiv);
-        }
-    }
-    
-    function syncStaffUI() { const allNotes = staffContainer.querySelectorAll('.note-container'); allNotes.forEach((noteDiv, index) => { if (userAccents[index] === 1) { noteDiv.classList.add('accented'); } else { noteDiv.classList.remove('accented'); } }); }
-    function applyPreset(presetName) { const presetPattern = melodyPresets[presetName]; const totalNotes = currentTotalMeasures * notesPerMeasure; for (let i = 0; i < totalNotes; i++) { userAccents[i] = presetPattern[i] || 0; } syncStaffUI(); renderExercise(); }
-    function populatePresetSelector() { if(!presetSelect) return; presetSelect.innerHTML = ''; for (const name in melodyPresets) { const option = document.createElement('option'); option.value = name; option.textContent = name; presetSelect.appendChild(option); } }
-    
-    function initializeApp() {
-        if (document.getElementById('input-staff')) {
-            createInputStaff();
-            renderExercise(); 
-            // DİKKAT: Genişlik eşitleme kodunu kaldırdık, artık gerek yok.
-        }
-    }
-    
-    buttons.forEach(button => { button.addEventListener('click', (e) => { buttons.forEach(btn => btn.classList.remove('active')); e.target.classList.add('active'); currentTotalMeasures = parseInt(e.target.id.split('-')[1]); initializeApp(); }); });
-    presetSelect.addEventListener('change', (e) => { applyPreset(e.target.value); });
-    
-    populatePresetSelector();
-    initializeApp();
-
-    var swiper = new Swiper(".mySwiper", {
-        slidesPerView: "auto",
-        centeredSlides: true,
-        spaceBetween: 20,
-        loop: true,
-        navigation: { nextEl: ".swiper-button-next", prevEl: ".swiper-button-prev", },
-        pagination: { el: ".swiper-pagination", clickable: true, },
-    });
-    
-    let lastScrollTop = 0;
-    const header = document.querySelector('.main-header');
-    window.addEventListener("scroll", function() {
-        if (!header) return;
-        let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-        if (scrollTop > lastScrollTop && scrollTop > header.offsetHeight) {
-            header.classList.add('hidden');
-        } else {
-            header.classList.remove('hidden');
-        }
-        lastScrollTop = scrollTop <= 0 ? 0 : scrollTop; 
-    }, false);
-
-    // DÜZELTME: Sayfanın otomatik kayma hatasını çözen kod
-    window.addEventListener('load', () => {
-        setTimeout(() => window.scrollTo(0, 0), 1);
-    });
+    const maxNotes=96;const generateGroupingPattern=t=>{const e=[];for(let o=0;o<maxNotes;o++)e.push(o%t==0?1:0);return e};const melodyPresets={"Custom (Clear)":[],"2-Note Grouping":generateGroupingPattern(2),"3-Note Grouping":generateGroupingPattern(3),"4-Note Grouping":generateGroupingPattern(4),"5-Note Grouping":generateGroupingPattern(5),"6-Note Grouping":generateGroupingPattern(6),"7-Note Grouping":generateGroupingPattern(7)};const stickingGroups=[{title:"Single",patterns:{R:"rlrl",L:"lrlr"}},{title:"Double",patterns:{R:"rrll",L:"llrr"}},{title:"Inverted Double",patterns:{R:"rllr",L:"lrrl"}},{title:"Paradiddle",patterns:{R:"rlrrlrll",L:"lrllrllr"}},{title:"Paradiddle Inversion no:1",patterns:{R:"rllrlrrl",L:"lrrlrllr"}},{title:"Paradiddle Inversion no:2",patterns:{R:"rrlrllrl",L:"llrllr"}},{title:"Four Stroke Rolls",patterns:{R:"rrrrllll",L:"llllrrrr"}},{title:"Single Hand Patterns",patterns:{R:"rrrr",L:"llll"}}];const notesPerMeasure=8,notesPerRow=4*notesPerMeasure;let currentTotalMeasures=4,userAccents=[];const staffContainer=document.getElementById("input-staff"),outputDiv=document.getElementById("output"),buttons=[document.getElementById("btn-4"),document.getElementById("btn-8"),document.getElementById("btn-12")],presetSelect=document.getElementById("preset-select");function renderExercise(){if(!outputDiv)return;const t=notesPerMeasure*currentTotalMeasures;let e="";for(const o of stickingGroups){e+=`<div class="sticking-group-container"><h3>${o.title}</h3>`;const n=Object.keys(o.patterns);n.forEach((s,a)=>{let l="";for(let e=0;e<t;e++)l+=o.patterns[s][e%o.patterns[s].length];let r=[];for(let t=0;t<l.length;t+=notesPerRow)r.push(l.substring(t,t+notesPerRow));r.forEach((t,o)=>{let n='<div class="line">';for(let e=0;e<t.length;e++){const s=o*notesPerRow+e,a=t[e],l=userAccents[s]===1?"note accent":"note";n+=`<span class="${l}">${a}</span>`,(e+1)%notesPerMeasure==0&&e<t.length-1?n+='<span class="bar-line">|</span>':(e+1)%4==0&&(n+='<span class="sub-spacer"></span>')}n+="</div>",e+=n}),a<n.length-1&&(e+='<div class="variation-spacer"></div>')}),e+="</div>"}outputDiv.innerHTML=e}function createInputStaff(){if(!staffContainer)return;staffContainer.innerHTML="";const t=notesPerMeasure*currentTotalMeasures;userAccents=new Array(t).fill(0);let e=0;for(let o=0;o<currentTotalMeasures;o++){const n=document.createElement("div");n.classList.add("measure");for(let s=0;s<notesPerMeasure;s++){const a=document.createElement("div");a.classList.add("note-container"),a.dataset.index=e;const l=document.createElement("div");l.classList.add("accent-mark"),l.innerHTML=">";const r=document.createElement("div");r.classList.add("note-head");const c=document.createElement("div");c.classList.add("note-stem"),a.appendChild(l),a.appendChild(r),a.appendChild(c),a.addEventListener("click",()=>{a.classList.toggle("accented");const t=parseInt(a.dataset.index);userAccents[t]=userAccents[t]===0?1:0,renderExercise(),presetSelect.value="Custom (Clear)"}),n.appendChild(a),e++}const s=document.createElement("div");s.classList.add("beam","first-group");const a=document.createElement("div");a.classList.add("beam","second-group"),n.appendChild(s),n.appendChild(a),staffContainer.appendChild(n)}}function syncStaffUI(){const t=staffContainer.querySelectorAll(".note-container");t.forEach((t,e)=>{userAccents[e]===1?t.classList.add("accented"):t.classList.remove("accented")})}function applyPreset(t){const e=melodyPresets[t],o=currentTotalMeasures*notesPerMeasure;for(let t=0;t<o;t++)userAccents[t]=e[t]||0;syncStaffUI(),renderExercise()}function populatePresetSelector(){if(!presetSelect)return;presetSelect.innerHTML="";for(const t in melodyPresets){const e=document.createElement("option");e.value=t,e.textContent=t,presetSelect.appendChild(e)}}function initializeApp(){document.getElementById("input-staff")&&(createInputStaff(),renderExercise())}buttons.forEach(t=>{t.addEventListener("click",e=>{buttons.forEach(t=>t.classList.remove("active")),e.target.classList.add("active"),currentTotalMeasures=parseInt(e.target.id.split("-")[1]),initializeApp()})}),presetSelect.addEventListener("change",t=>{applyPreset(t.target.value)}),populatePresetSelector(),initializeApp();var swiper=new Swiper(".mySwiper",{slidesPerView:"auto",centeredSlides:!0,spaceBetween:20,loop:!0,navigation:{nextEl:".swiper-button-next",prevEl:".swiper-button-prev"},pagination:{el:".swiper-pagination",clickable:!0}});let lastScrollTop=0;const header=document.querySelector(".main-header");window.addEventListener("scroll",function(){if(!header)return;let t=window.pageYOffset||document.documentElement.scrollTop;t>lastScrollTop&&t>header.offsetHeight?header.classList.add("hidden"):header.classList.remove("hidden"),lastScrollTop=t<=0?0:t},!1),window.addEventListener("load",()=>{setTimeout(()=>window.scrollTo(0,0),1)});
     </script>
 </body>
 </html>
