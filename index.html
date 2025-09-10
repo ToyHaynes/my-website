@@ -64,9 +64,10 @@
             gap: 0.8rem;
         }
         .brand-logo {
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
+            width: 48px;
+            height: 48px;
+            border-radius: 8px;
+            object-fit: cover;
         }
         .header-brand .brand-name {
             margin: 0;
@@ -172,7 +173,8 @@
 
         .main-footer { text-align: center; padding: 2rem; background-color: var(--container-bg); }
         .social-links { list-style: none; padding: 0; margin: 0 0 1rem 0; display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap; align-items: center; }
-        .social-links a { color: var(--neutral-color); text-decoration: none; font-size: 1rem; transition: color 0.2s; }
+        .social-links a { display: flex; align-items: center; justify-content: center; width: 32px; height: 32px; color: var(--neutral-color); text-decoration: none; font-size: 1.2rem; transition: color 0.2s; }
+        .social-links i { display: block; }
         .social-links a:hover { color: var(--primary-color); }
         .main-footer p {
             color: var(--neutral-light);
@@ -328,8 +330,9 @@
             <li><a href="instagram.com/batuhantoyhan" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a></li>
             <li><a href="https://open.spotify.com/artist/0orq0FTDo9vCcUYQNG3exs?si=vME_AbL9QluZ2-kxsoOlLA" target="_blank" title="Spotify"><i class="fab fa-spotify"></i></a></li>
             <li><a href="https://mindownbeats.bandcamp.com" target="_blank" title="Bandcamp"><i class="fab fa-bandcamp"></i></a></li>
-            <li><a href="#" target="_blank" title="Ko-fi"><i class="fas fa-mug-hot"></i></a></li>
+            <li><a href="https://github.com/ToyHaynes" target="_blank" title="GitHub"><i class="fab fa-github"></i></a></li>
             <li><a href="#" target="_blank" title="Patreon"><i class="fab fa-patreon"></i></a></li>
+            <li><a href="#" target="_blank" title="Ko-fi"><i class="fas fa-mug-hot"></i></a></li>
         </ul>
         <p class="footer-copyright" data-langkey="footer_copyright">© 2025 Batuhan Toyhan. All Rights Reserved.</p>
     </footer>
