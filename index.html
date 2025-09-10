@@ -158,7 +158,7 @@
         .music-swiper iframe { border-radius: 12px; }
 
         .main-footer { text-align: center; padding: 2rem; background-color: var(--container-bg); }
-        .social-links { list-style: none; padding: 0; margin: 0 0 1rem 0; display: flex; justify-content: center; gap: 1.5rem; }
+        .social-links { list-style: none; padding: 0; margin: 0 0 1rem 0; display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap; }
         .social-links a { color: var(--neutral-color); text-decoration: none; font-size: 1rem; transition: color 0.2s; }
         .social-links a:hover { color: var(--primary-color); }
         .main-footer p {
@@ -308,7 +308,12 @@
         <h3 data-langkey="contact_title">Contact & Support</h3>
         <p class="footer-description" data-langkey="contact_desc">You can reach me out on my social media channels or support my work.</p>
         <ul class="social-links">
-            <li><a href="https://www.youtube.com/channel/UCvekuqaqyAe53lzC2b6NR1w" target="_blank" title="YouTube">YOUTUBE</a></li> <li><a href="instagram.com/batuhantoyhan" target="_blank" title="Instagram">INSTAGRAM</a></li> <li><a href="https://open.spotify.com/artist/0orq0FTDo9vCcUYQNG3exs?si=vME_AbL9QluZ2-kxsoOlLA" target="_blank" title="Spotify">SPOTIFY</a></li> <li><a href="https://mindownbeats.bandcamp.com" target="_blank" title="Bandcamp">BANDCAMP</a></li><li><a href="#" target="_blank" title="Ko-fi">KO-FI</a></li> <li><a href="#" target="_blank" title="Patreon">PATREON</a></li>
+            <li><a href="https://www.youtube.com/channel/UCvekuqaqyAe53lzC2b6NR1w" target="_blank" title="YouTube">YOUTUBE</a></li>
+            <li><a href="instagram.com/batuhantoyhan" target="_blank" title="Instagram">INSTAGRAM</a></li>
+            <li><a href="https://open.spotify.com/artist/0orq0FTDo9vCcUYQNG3exs?si=vME_AbL9QluZ2-kxsoOlLA" target="_blank" title="Spotify">SPOTIFY</a></li>
+            <li><a href="https://mindownbeats.bandcamp.com" target="_blank" title="Bandcamp">BANDCAMP</a></li>
+            <li><a href="#" target="_blank" title="Ko-fi">KO-FI</a></li>
+            <li><a href="#" target="_blank" title="Patreon">PATREON</a></li>
         </ul>
         <p class="footer-copyright" data-langkey="footer_copyright">© 2025 Batuhan Toyhan. All Rights Reserved.</p>
     </footer>
@@ -440,59 +445,7 @@
     </script>
     
     <script>
-    const maxNotes=96;
-    const generateGroupingPattern=t=>{const e=[];for(let o=0;o<maxNotes;o++)e.push(o%t==0?1:0);return e};
-    
-    // Orijinal script'inizdeki metinleri, çeviri anahtarlarıyla değiştirdik
-    let melodyPresets = {};
-    let stickingGroups = [];
-
-    function updateDynamicContentLanguage() {
-        const currentLang = document.documentElement.lang || 'en';
-        
-        melodyPresets = {
-            [translations[currentLang].preset_custom]: [],
-            [translations[currentLang].preset_2_note]: generateGroupingPattern(2),
-            [translations[currentLang].preset_3_note]: generateGroupingPattern(3),
-            [translations[currentLang].preset_4_note]: generateGroupingPattern(4),
-            [translations[currentLang].preset_5_note]: generateGroupingPattern(5),
-            [translations[currentLang].preset_6_note]: generateGroupingPattern(6),
-            [translations[currentLang].preset_7_note]: generateGroupingPattern(7)
-        };
-        
-        stickingGroups = [
-            { titleKey: "sticking_single", patterns: { R: "rlrl", L: "lrlr" } },
-            { titleKey: "sticking_double", patterns: { R: "rrll", L: "llrr" } },
-            { titleKey: "sticking_inverted_double", patterns: { R: "rllr", L: "lrrl" } },
-            { titleKey: "sticking_paradiddle", patterns: { R: "rlrrlrll", L: "lrllrllr" } },
-            { titleKey: "sticking_paradiddle_inv1", patterns: { R: "rllrlrrl", L: "lrrlrllr" } },
-            { titleKey: "sticking_paradiddle_inv2", patterns: { R: "rrlrllrl", L: "llrllr" } },
-            { titleKey: "sticking_four_stroke", patterns: { R: "rrrrllll", L: "llllrrrr" } },
-            { titleKey: "sticking_single_hand", patterns: { R: "rrrr", L: "llll" } }
-        ];
-    }
-    
-    const notesPerMeasure=8,notesPerRow=4*notesPerMeasure;let currentTotalMeasures=4,userAccents=[];const staffContainer=document.getElementById("input-staff"),outputDiv=document.getElementById("output"),buttons=[document.getElementById("btn-4"),document.getElementById("btn-8"),document.getElementById("btn-12")],presetSelect=document.getElementById("preset-select");
-    
-    function renderExercise(){
-        updateDynamicContentLanguage(); // Dil verilerini güncelle
-        const currentLang = document.documentElement.lang || 'en';
-        if(!outputDiv)return;const t=notesPerMeasure*currentTotalMeasures;let e="";for(const o of stickingGroups){
-            // Çevrilmiş başlığı al
-            const translatedTitle = translations[currentLang][o.titleKey];
-            e+=`<div class="sticking-group-container"><h3>${translatedTitle}</h3>`;const n=Object.keys(o.patterns);n.forEach((s,a)=>{let l="";for(let e=0;e<t;e++)l+=o.patterns[s][e%o.patterns[s].length];let r=[];for(let t=0;t<l.length;t+=notesPerRow)r.push(l.substring(t,t+notesPerRow));r.forEach((t,o)=>{let n='<div class="line">';for(let e=0;e<t.length;e++){const s=o*notesPerRow+e,a=t[e],l=userAccents[s]===1?"note accent":"note";n+=`<span class="${l}">${a}</span>`,(e+1)%notesPerMeasure==0&&e<t.length-1?n+='<span class="bar-line">|</span>':(e+1)%4==0&&(n+='<span class="sub-spacer"></span>')}n+="</div>",e+=n}),a<n.length-1&&(e+='<div class="variation-spacer"></div>')}),e+="</div>"}outputDiv.innerHTML=e}
-            
-    function createInputStaff(){if(!staffContainer)return;staffContainer.innerHTML="";const t=notesPerMeasure*currentTotalMeasures;userAccents=new Array(t).fill(0);let e=0;for(let o=0;o<currentTotalMeasures;o++){const n=document.createElement("div");n.classList.add("measure");for(let s=0;s<notesPerMeasure;s++){const a=document.createElement("div");a.classList.add("note-container"),a.dataset.index=e;const l=document.createElement("div");l.classList.add("accent-mark"),l.innerHTML=">";const r=document.createElement("div");r.classList.add("note-head");const c=document.createElement("div");c.classList.add("note-stem"),a.appendChild(l),a.appendChild(r),a.appendChild(c),a.addEventListener("click",()=>{a.classList.toggle("accented");const t=parseInt(a.dataset.index);userAccents[t]=userAccents[t]===0?1:0,renderExercise(),presetSelect.value=Object.keys(melodyPresets)[0]}),n.appendChild(a),e++}const s=document.createElement("div");s.classList.add("beam","first-group");const a=document.createElement("div");a.classList.add("beam","second-group"),n.appendChild(s),n.appendChild(a),staffContainer.appendChild(n)}}
-    
-    function syncStaffUI(){const t=staffContainer.querySelectorAll(".note-container");t.forEach((t,e)=>{userAccents[e]===1?t.classList.add("accented"):t.classList.remove("accented")})}
-    
-    function applyPreset(t){const e=melodyPresets[t],o=currentTotalMeasures*notesPerMeasure;for(let t=0;t<o;t++)userAccents[t]=e[t]||0;syncStaffUI(),renderExercise()}
-    
-    function populatePresetSelector(){
-        updateDynamicContentLanguage(); // Dil verilerini güncelle
-        if(!presetSelect)return;const currentValue = presetSelect.value; presetSelect.innerHTML="";for(const t in melodyPresets){const e=document.createElement("option");e.value=t,e.textContent=t,presetSelect.appendChild(e)} presetSelect.value = currentValue; }
-    
-    function initializeApp(){document.getElementById("input-staff")&&(createInputStaff(),renderExercise())}buttons.forEach(t=>{t.addEventListener("click",e=>{buttons.forEach(t=>t.classList.remove("active")),e.target.classList.add("active"),currentTotalMeasures=parseInt(e.target.id.split("-")[1]),initializeApp()})}),presetSelect.addEventListener("change",t=>{applyPreset(t.target.value)}),populatePresetSelector(),initializeApp();var swiper=new Swiper(".mySwiper",{slidesPerView:"auto",centeredSlides:!0,spaceBetween:20,loop:!0,navigation:{nextEl:".swiper-button-next",prevEl:".swiper-button-prev"},pagination:{el:".swiper-pagination",clickable:!0}});let lastScrollTop=0;const header=document.querySelector(".main-header");window.addEventListener("scroll",function(){if(!header)return;let t=window.pageYOffset||document.documentElement.scrollTop;t>lastScrollTop&&t>header.offsetHeight?header.classList.add("hidden"):header.classList.remove("hidden"),lastScrollTop=t<=0?0:t},!1),window.addEventListener("load",()=>{setTimeout(()=>window.scrollTo(0,0),1)});var musicSwiper = new Swiper(".music-swiper", {
+var swiper=new Swiper(".mySwiper",{slidesPerView:"auto",centeredSlides:!0,spaceBetween:20,loop:!0,navigation:{nextEl:".swiper-button-next",prevEl:".swiper-button-prev"},pagination:{el:".swiper-pagination",clickable:!0}});let lastScrollTop=0;const header=document.querySelector(".main-header");window.addEventListener("scroll",function(){if(!header)return;let t=window.pageYOffset||document.documentElement.scrollTop;t>lastScrollTop&&t>header.offsetHeight?header.classList.add("hidden"):header.classList.remove("hidden"),lastScrollTop=t<=0?0:t},!1),window.addEventListener("load",()=>{setTimeout(()=>window.scrollTo(0,0),1)});var musicSwiper = new Swiper(".music-swiper", {
         slidesPerView: "auto",
         centeredSlides: true,
         spaceBetween: 30, // Aralarındaki boşluk
