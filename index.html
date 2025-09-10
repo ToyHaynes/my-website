@@ -58,6 +58,16 @@
             flex-direction: column;
             align-items: center;
         }
+        .brand-name-container {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+        .brand-logo {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+        }
         .header-brand .brand-name {
             margin: 0;
             font-family: var(--font-main);
@@ -74,12 +84,13 @@
         .lang-switcher {
             margin-left: 2rem;
             font-family: var(--font-main);
-            font-weight: 500;
+            font-weight: 400;
+            font-size: 0.85rem;
         }
         .lang-switcher a {
             color: var(--neutral-color);
             text-decoration: none;
-            padding: 0.2rem 0.4rem;
+            padding: 0.15rem 0.3rem;
             transition: color 0.2s;
         }
         .lang-switcher a:hover {
@@ -160,7 +171,7 @@
         .music-swiper iframe { border-radius: 12px; }
 
         .main-footer { text-align: center; padding: 2rem; background-color: var(--container-bg); }
-        .social-links { list-style: none; padding: 0; margin: 0 0 1rem 0; display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap; }
+        .social-links { list-style: none; padding: 0; margin: 0 0 1rem 0; display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap; align-items: center; }
         .social-links a { color: var(--neutral-color); text-decoration: none; font-size: 1rem; transition: color 0.2s; }
         .social-links a:hover { color: var(--primary-color); }
         .main-footer p {
@@ -209,7 +220,10 @@
 <body>
     <header class="main-header">
         <div class="header-brand">
-            <h1 class="brand-name">Batuhan Toyhan</h1>
+            <div class="brand-name-container">
+                <img src="tups.1.png" alt="Logo" class="brand-logo">
+                <h1 class="brand-name">Batuhan Toyhan</h1>
+            </div>
         </div>
         <nav class="main-nav">
             <ul>
@@ -219,9 +233,9 @@
             </ul>
         </nav>
         <div class="lang-switcher">
-            <a href="#" class="lang-link active" data-lang="en">EN</a>
+            <a href="#" class="lang-link active" data-lang="en">en</a>
             <span>|</span>
-            <a href="#" class="lang-link" data-lang="tr">TR</a>
+            <a href="#" class="lang-link" data-lang="tr">tr</a>
         </div>
     </header>
     <main>
