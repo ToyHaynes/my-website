@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Batuhan Toyhan | A&R+ Drum Exercise Generator</title>
+    <title>Batuhan Toyhan | Personal Website</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -211,7 +211,6 @@
         </div>
         <nav class="main-nav">
             <ul>
-                <li><a href="#app">A&R+</a></li>
                 <li><a href="#about" data-langkey="nav_about">about</a></li>
                 <li><a href="#videos" data-langkey="nav_videos">videos</a></li>
                 <li><a href="#contact" data-langkey="nav_contact">contact</a></li>
@@ -224,25 +223,6 @@
         </div>
     </header>
     <main>
-        <section id="app">
-            <div class="section-content">
-                <div class="container">
-                    <h2>A&R+</h2>
-                    <h3 data-langkey="app_create_melody">1. Create Melody</h3>
-                    <div class="controls">
-                        <div>
-                            <button id="btn-4" class="control-btn active" data-langkey="app_4_bar">4 Bar</button>
-                            <button id="btn-8" class="control-btn" data-langkey="app_8_bar">8 Bar</button>
-                            <button id="btn-12" class="control-btn" data-langkey="app_12_bar">12 Bar</button>
-                        </div>
-                        <select id="preset-select" class="control-select"></select>
-                    </div>
-                    <div id="input-staff"></div>
-                    <h3 data-langkey="app_stickings">2. Stickings</h3>
-                    <div id="output"></div>
-                </div>
-            </div>
-        </section>
         <section id="music" style="background-color: rgba(0,0,0,0.1);">
             <div class="section-content">
                 <div class="swiper music-swiper">
@@ -339,7 +319,7 @@
     // 1. Tüm çevirileri tek bir yerde toplayalım
     const translations = {
         en: {
-            page_title: "Batuhan Toyhan | A&R+ Drum Exercise Generator",
+            page_title: "Batuhan Toyhan | Personal Website",
             nav_about: "about",
             nav_videos: "videos",
             nav_contact: "contact",
@@ -373,7 +353,7 @@
             sticking_single_hand: "Single Hand Patterns"
         },
         tr: {
-            page_title: "Batuhan Toyhan | A&R+ Davul Egzersiz Üretici",
+            page_title: "Batuhan Toyhan | Kişisel Web Sitesi",
             nav_about: "hakkımda",
             nav_videos: "videolar",
             nav_contact: "iletişim",
@@ -383,7 +363,7 @@
             app_12_bar: "12 Ölçü",
             app_stickings: "2. Vuruş Teknikleri (Sticking)",
             about_title: "Hakkımda",
-            about_p1: "RYaşar Üniversitesi Caz Performans bölümünde Emre Kartari ile davul çalıştım. Ana odağım caz olsa da geçtiğimiz 15 yılda punk-rock'tan elektronik tasavvufa uzanan geniş bir yelpazede sahne aldım.",
+            about_p1: "Yaşar Üniversitesi Caz Performans bölümünde Emre Kartari ile davul çalıştım. Ana odağım caz olsa da geçtiğimiz 15 yılda punk-rock'tan elektronik tasavvufa uzanan geniş bir yelpazede sahne aldım.",
             about_p2: "Bu çeşitli müzikal temel, sesin kendisine duyduğum merakı ateşleyerek beni prodüksiyon dünyasına yöneltti. Solo projem Mindown'da, sampling ve ses tasarımı üzerine derinleşerek kendi parçalarımı yayınlamaya başladım. Bu alandaki çalışmalarım, popüler YouTube programı Katarsis'in jenerik müziği ve ses kayıtlarını hazırlamak gibi profesyonel fırsatlara ve çeşitli belgesel projelerinde yer almama olanak tanıdı.",
             about_p3: "Son zamanlarda, klasik davul metotlarını temel alarak A&R+ ve ToT+ gibi interaktif sistemler geliştirmek ve ses ile görüntünün etkileşimine dayalı performanslar tasarlamak üzerine çalışıyorum.",
             contact_title: "İletişim",
