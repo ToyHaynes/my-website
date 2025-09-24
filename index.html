@@ -421,7 +421,7 @@
         document.querySelectorAll('[data-langkey]').forEach(element => {
             const key = element.getAttribute('data-langkey');
             if (translations[lang][key]) {
-                element.innerText = translations[lang][key];
+                element.innerHTML = translations[lang][key];
             }
         });
         
